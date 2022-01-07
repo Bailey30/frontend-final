@@ -48,3 +48,20 @@ export const loginFetch = async (email, password, setUser) => {
       console.log(error);
     }
   };
+
+  export const getProductFetch = async(setFetchedProductInfo) => {
+    try {
+        const res = await fetch("http://localhost:5000/products/", {
+          method: "GET",
+          headers: {"Authorization": `Bearer ${localStorage.getItem("myToken")}`}
+        })
+        const data = await res.json()
+        console.log(data);
+        setFetchedProductInfo(data)
+
+
+
+    } catch (error) {
+      console.log(error);
+    }
+  }

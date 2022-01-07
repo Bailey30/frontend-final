@@ -5,14 +5,14 @@ import {Link} from "react-router-dom"
 const NavComponent = styled.div`
   
     display: flex;
-    margin: 0;
+    margin: 0 auto;
     align-items: center;
     justify-content: space-between;
-    top: 0;
+    /* top: 0;
     left: 0;
-    right: 0;
-    width: 100vw;
-    height: 7vh;
+    right: 0; */
+    max-width: 100vw;
+    height: 8vh;
     background-color: white;
 ;
 `;
@@ -22,6 +22,7 @@ const Buttons = styled.div`
     height: 100%;
     width: 25vw;
     justify-content: space-evenly;
+    align-items: center;
     
 `;
 
@@ -34,11 +35,14 @@ const NavButton = styled.button`
     &:hover{
         border-bottom: 1px solid black;
     }
+    font-size: 12px;
 `;
 
 const Title = styled.h3`
     color: black;
     padding-left: 30px;
+    letter-spacing: 1px;
+    font-size: 22px;
 `;
 
 function Navbar() {
@@ -49,16 +53,16 @@ function Navbar() {
             </Link>
             <Buttons>
             <Link to='/'>
-                <NavButton>Home</NavButton>
+                <NavButton>HOME</NavButton>
             </Link>
             <Link to='/about' style={{'min-width': 'fit-content'}}>
-                <NavButton>About us</NavButton>
+                <NavButton>ABOUT US</NavButton>
             </Link>
             <Link to='/basket'>
-                <NavButton>Basket</NavButton>
+                <NavButton>BASKET</NavButton>
             </Link>
             <Link to='/login'>
-                <NavButton>Login</NavButton>
+                <NavButton>LOGIN</NavButton>
             </Link>
             </Buttons>
         </NavComponent>

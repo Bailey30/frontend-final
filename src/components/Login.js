@@ -7,14 +7,14 @@ const Container = styled.div`
 display: flex;
 align-items: center;
 justify-content: center;
-height: 100vh;
+height: 90vh;
 background: #F6F8FA;
 `
 const ContainerContainer = styled.div`
 display: flex;
 width: 50vw;
 height: 75vh;
-margin-top: 50px;
+margin-top: 0px;
 background: white;
 box-shadow: 0px 10px 40px 5px rgba(0,0,0,0.1);
 ${mobile({ width: "90vw" })}
