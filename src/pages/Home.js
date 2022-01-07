@@ -23,7 +23,7 @@ background-color: red;
 `;
 
 const Logo = styled.div`
-background-image: url({logo});
+background-image: url(${logo});
 `;
 const Spacer = styled.div`
 `;
