@@ -8,7 +8,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 height: 90vh;
-background: #F6F8FA;
+/* background: #F6F8FA; */
 `
 const ContainerContainer = styled.div`
 display: flex;
@@ -89,7 +89,7 @@ margin: 20px 0;
 const Button = styled.button`
 width: 100%;
 height: 50px;
-border-radius: 5px;
+/* border-radius: 5px; */
 border: none;
 background: ${props => props.color === "99A9B9" ? "#99A9B9" : "none"};
 border: 2px solid #${props => props.border};
