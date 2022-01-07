@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
-<<<<<<< HEAD
-=======
 import { loginFetch, signUpFetch } from "../requestMethods"
->>>>>>> 4eebe74fe25055ee36681b860dfe67be778ac9f5
 import {mobile, tablet} from "../responsive"
 
 const Container = styled.div`
