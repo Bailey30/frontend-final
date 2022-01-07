@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { loginFetch, signUpFetch } from "../requestMethods"
-import {mobile, tablet} from "../responsive"
+import { mobile, tablet } from "../responsive"
 
 const Container = styled.div`
 display: flex;
@@ -17,8 +17,8 @@ height: 75vh;
 margin-top: 50px;
 background: white;
 box-shadow: 0px 10px 40px 5px rgba(0,0,0,0.1);
-${mobile({width: "90vw"})}
-/* ${tablet({width: "70vw"})} */
+${mobile({ width: "90vw" })}
+/* ${tablet({ width: "70vw" })} */
 `
 
 const LeftCont = styled.div`
@@ -27,8 +27,8 @@ height: 100%;
 display: flex;
 justify-content: center;
 align-items: center;
-${mobile({width: "100%"})}
-${tablet({width: "100%"})}
+${mobile({ width: "100%" })}
+${tablet({ width: "100%" })}
 `
 
 const Heading = styled.div`
@@ -42,20 +42,41 @@ flex-direction: column;
 justify-content: center;
 width: 70%;
 `
+const Label = styled.label`
+position: absolute;
+left: 0;
+left: 20px;
+/* background: #F6F8FA; */
+background: white;
+width: fit-content;
+height: fit-content;
+color: lightgray;
+transition: all 0.3s ease;
+`
 
+const InputCont = styled.div`
+position: relative;
+width: 100%;
+height: auto;
+display: flex;
+align-items: center;
+&:focus-within ${Label}{
+    transform: translateY(-30px) scale(0.9);}
+`
 
 const Input = styled.input`
 padding: 20px;
 margin: 10px 0;
-width: auto;
-background: #F6F8FA;
+width: 100%;
+box-sizing: border-box;
+/* background: #F6F8FA; */
+background: white;
 border:  2px solid lightgray;
 border-radius: 7px;
 outline: none;
-transition: all 0.3s ease;;
-&:focus{
-    border:  2px solid #99A9B9;
-};
+transition: all 0.3s ease;
+position: relative;
+
 `
 
 const ButtonCont = styled.div`
@@ -79,8 +100,8 @@ const RightCont = styled.div`
 width:45%;
 position: relative;
 overflow: hidden;
-${mobile({display: "none"})}
-${tablet({display: "none"})}
+${mobile({ display: "none" })}
+${tablet({ display: "none" })}
 
 `
 
@@ -109,6 +130,7 @@ background: none;
 `
 
 
+
 function Login() {
     const [login, setLogin] = useState(true)
     const [user, setUser] = useState()
@@ -126,24 +148,24 @@ function Login() {
     const handler = async (e) => {
         e.preventDefault();
         console.log(login);
-    try {
-      if (!login) {
-        signUpFetch(username, email, password, setUser);
-      } else {
-        loginFetch(email, password, setUser);
-      }
-        } catch (error) {}
+        try {
+            if (!login) {
+                signUpFetch(username, email, password, setUser);
+            } else {
+                loginFetch(email, password, setUser);
+            }
+        } catch (error) { }
     };
-    
+
     return (
         <Container>
             <ContainerContainer>
                 <LeftCont>
                     <FormWrapper>
                         <Heading>{login ? <h1>Welcome back</h1> : <h1>Create Account</h1>}</Heading>
-                        {login ? null : <Input onChange={(e) => setUsername(e.target.value)} placeholder="username"></Input>}
-                        <Input onChange={(e) => setEmail(e.target.value)} placeholder="email"></Input>
-                        <Input onChange={(e) => setPassword(e.target.value)} placeholder="password"></Input>
+                        {login ? null : <InputCont> <Input onChange={(e) => setUsername(e.target.value)}></Input><Label>name</Label></InputCont>} 
+                        <InputCont><Input onChange={(e) => setEmail(e.target.value)}></Input><Label>email</Label></InputCont>
+                        <InputCont><Input onChange={(e) => setPassword(e.target.value)} ></Input><Label>password</Label></InputCont>
                         {login ? null :
                             <AgreementCont>
                                 <Checkbox type="checkbox"></Checkbox>
