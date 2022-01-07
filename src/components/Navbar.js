@@ -11,7 +11,7 @@ const NavComponent = styled.div`
     /* top: 0;
     left: 0;
     right: 0; */
-    max-width: 100vw;
+    max-width: 93vw;
     height: 8vh;
     background-color: white;
     z-index: 100;

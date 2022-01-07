@@ -36,6 +36,7 @@ z-index: -1;
 const ProductList = styled.div`
 width: 93vw;
 display: flex;
+flex-wrap: wrap;
 margin: 0 auto;
 justify-content: center;
 gap: 25px;

@@ -33,7 +33,7 @@ ${tablet({ width: "100%" })}
 
 const Heading = styled.div`
 margin: 0 auto;
-color: #99A9B9;
+color: black;
 text-align:center;`
 
 const FormWrapper = styled.form`
@@ -91,7 +91,11 @@ width: 100%;
 height: 50px;
 /* border-radius: 5px; */
 border: none;
-background: ${props => props.color === "99A9B9" ? "#99A9B9" : "none"};
+background: #d3a087;
+transition: all 0.1s ease;
+&:hover {
+    background: #BF8262
+}
 border: 2px solid #${props => props.border};
 color: ${props => props.text};
 cursor: pointer;

@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 
 
 const Container = styled.div`
-max-width: 23%;
+width: 23%;
+
 display: flex;
 flex-direction:column;
 margin: 20px 0px;
@@ -52,7 +53,7 @@ width: 30px;
 // ;
 // `
 const Image = styled.img`
-height: 100%;
+width: 100%;
 object-fit: cover;
 `
 

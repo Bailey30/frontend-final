@@ -8,7 +8,7 @@ const Container = styled.div``
 function ProductPage() {
   return (
     <Container>
-      <Navbar style={{"z-index": "100"}}/>
+      <Navbar style={{"z-index": 100}}/>
       <ProductFeed/>
     </Container>
   )
