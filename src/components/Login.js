@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
+<<<<<<< HEAD
+=======
+import { loginFetch, signUpFetch } from "../requestMethods"
+>>>>>>> 4eebe74fe25055ee36681b860dfe67be778ac9f5
 import {mobile, tablet} from "../responsive"
 
 const Container = styled.div`
@@ -110,21 +114,39 @@ background: none;
 
 function Login() {
     const [login, setLogin] = useState(true)
-
+    const [user, setUser] = useState()
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+    const [username, setUsername] = useState()
+    console.log(username)
+    console.log(email)
+    console.log(password)
     const LoginTrueFalse = (e) => {
         e.preventDefault()
         setLogin(!login)
     }
 
+    const handler = async (e) => {
+        e.preventDefault();
+        console.log(login);
+    try {
+      if (!login) {
+        signUpFetch(username, email, password, setUser);
+      } else {
+        loginFetch(email, password, setUser);
+      }
+        } catch (error) {}
+    };
+    
     return (
         <Container>
             <ContainerContainer>
                 <LeftCont>
                     <FormWrapper>
                         <Heading>{login ? <h1>Welcome back</h1> : <h1>Create Account</h1>}</Heading>
-                        {login ? null : <Input placeholder="username"></Input>}
-                        <Input placeholder="email"></Input>
-                        <Input placeholder="password"></Input>
+                        {login ? null : <Input onChange={(e) => setUsername(e.target.value)} placeholder="username"></Input>}
+                        <Input onChange={(e) => setEmail(e.target.value)} placeholder="email"></Input>
+                        <Input onChange={(e) => setPassword(e.target.value)} placeholder="password"></Input>
                         {login ? null :
                             <AgreementCont>
                                 <Checkbox type="checkbox"></Checkbox>
@@ -132,7 +154,7 @@ function Login() {
                             </AgreementCont>
                         }
                         <ButtonCont>
-                            <Button color="99A9B9" text="white">{login ? "Sign in" : "Sign Up"}</Button>
+                            <Button onClick={handler} color="99A9B9" text="white">{login ? "Sign in" : "Sign Up"}</Button>
                             {/* <Button border="99A9B9" text="black">Sign In</Button> */}
                         </ButtonCont>
                         <LoginRegisterLink><Choice onClick={LoginTrueFalse}>{login ? "Need to create an account?" : "Already have an account?"}</Choice></LoginRegisterLink>
