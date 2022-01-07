@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Navbar from '../components/Navbar';
 
 const Container = styled.div`
-margin: 10px`
+`
 
 const Button = styled.button`
 color: ${props => props.color}`
