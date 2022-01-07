@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
+import {mobile, tablet} from "../responsive"
 
 const Container = styled.div`
 display: flex;
@@ -15,6 +16,8 @@ height: 75vh;
 margin-top: 50px;
 background: white;
 box-shadow: 0px 10px 40px 5px rgba(0,0,0,0.1);
+${mobile({width: "90vw"})}
+/* ${tablet({width: "70vw"})} */
 `
 
 const LeftCont = styled.div`
@@ -22,11 +25,15 @@ width: 55%;
 height: 100%;
 display: flex;
 justify-content: center;
-align-items: center;`
+align-items: center;
+${mobile({width: "100%"})}
+${tablet({width: "100%"})}
+`
 
 const Heading = styled.div`
 margin: 0 auto;
-color: #99A9B9;`
+color: #99A9B9;
+text-align:center;`
 
 const FormWrapper = styled.form`
 display: flex;
@@ -71,12 +78,16 @@ const RightCont = styled.div`
 width:45%;
 position: relative;
 overflow: hidden;
+${mobile({display: "none"})}
+${tablet({display: "none"})}
+
 `
 
 const Image = styled.img`
 height: 100%;
 position: absolute;
 right: 0;
+object-fit: cover;
 `
 const Checkbox = styled.input.attrs({ type: "checkbox" })`
 `
