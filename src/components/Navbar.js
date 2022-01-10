@@ -11,9 +11,10 @@ const NavComponent = styled.div`
     /* top: 0;
     left: 0;
     right: 0; */
-    max-width: 100vw;
+    max-width: 93vw;
     height: 8vh;
     background-color: white;
+    z-index: 100;
 ;
 `;
 
@@ -29,7 +30,7 @@ const Buttons = styled.div`
 const NavButton = styled.button`
     border: none;
     margin: 0;
-    height: 7vh;
+    height: 60%;
     color: black;
     background-color: white;
     &:hover{
@@ -42,7 +43,7 @@ const Title = styled.h3`
     color: black;
     padding-left: 30px;
     letter-spacing: 1px;
-    font-size: 22px;
+    font-size: 24px;
 `;
 
 function Navbar() {
@@ -52,8 +53,11 @@ function Navbar() {
             <Title>POTTREE</Title>
             </Link>
             <Buttons>
-            <Link to='/'>
-                <NavButton>HOME</NavButton>
+            <Link to='/productpage'>
+                <NavButton>SHOP</NavButton>
+            </Link>
+            <Link to='/productpage'>
+                <NavButton>SELL</NavButton>
             </Link>
             <Link to='/about' style={{'min-width': 'fit-content'}}>
                 <NavButton>ABOUT US</NavButton>
