@@ -29,20 +29,19 @@ border-top: 1px solid lightgray;
 margin-bottom: 0px;
 background: white;
 position: relative;
-z-index: -1;
-
+/* z-index: -1; */
 `
 
 const ProductList = styled.div`
-width: 93vw;
+width: 90vw;
 display: flex;
 flex-wrap: wrap;
 margin: 0 auto;
 justify-content: center;
-gap: 25px;
+gap: 22px;
 /* border: 1px solid gray; */
 position: relative;
-z-index: 100;
+/* z-index: 100; */
 
 
 `

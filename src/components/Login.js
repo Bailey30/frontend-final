@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { loginFetch, signUpFetch } from "../requestMethods"
 import { mobile, tablet } from "../responsive"
+import {useNavigate} from "react-router"
 
 const Container = styled.div`
 display: flex;
@@ -76,6 +77,9 @@ border-radius: 7px;
 outline: none;
 transition: all 0.3s ease;
 position: relative;
+&::placeholder {
+    color: lightgray;
+}
 
 `
 
@@ -91,7 +95,8 @@ width: 100%;
 height: 50px;
 /* border-radius: 5px; */
 border: none;
-background: #d3a087;
+/* background: #FFE9E2; */
+background: black;
 transition: all 0.1s ease;
 &:hover {
     background: #BF8262
@@ -132,18 +137,26 @@ const Choice = styled.button`
 border: none;
 background: none;
 `
+const Error = styled.h6`
+margin: 0;
+color: gray;`
 
 
 
 function Login() {
+    const navigate = useNavigate()
     const [login, setLogin] = useState(true)
-    const [user, setUser] = useState()
+    const [user, setUser] = useState({
+        username: "",
+        userId: "",
+        email: ""
+    })
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [username, setUsername] = useState()
-    console.log(username)
-    console.log(email)
-    console.log(password)
+    const [loggedIn, setLoggedIn] = useState()
+    const [errorMessage, setErrorMessage] = useState()
+
     const LoginTrueFalse = (e) => {
         e.preventDefault()
         setLogin(!login)
@@ -151,15 +164,39 @@ function Login() {
 
     const handler = async (e) => {
         e.preventDefault();
-        console.log(login);
+        console.log(`login: ${login}`);
         try {
             if (!login) {
-                signUpFetch(username, email, password, setUser);
+                signUpFetch(username, email, password, setUser, setLoggedIn,setErrorMessage);
             } else {
-                loginFetch(email, password, setUser);
+                loginFetch(email, password, setUser, setLoggedIn,setErrorMessage);
             }
         } catch (error) { }
     };
+
+    useEffect(() => {
+     if(loggedIn  && login) {
+            console.log(`user: ${user.userId}`);
+         console.log(login);
+        console.log(`logged in: ${loggedIn}`)
+
+        navigate("/loginsuccess")
+        console.log("login navigate");
+    } else if (loggedIn && login === false) {
+        console.log(user.userId);
+         console.log(login);
+        console.log(`logged in: ${loggedIn}`)
+
+        navigate("/registersuccess")
+        console.log("register navigate");
+    } else {
+        console.log(`logged in: ${loggedIn}`)
+    }
+    }, [loggedIn])
+
+    
+
+
 
     return (
         <Container>
@@ -167,9 +204,16 @@ function Login() {
                 <LeftCont>
                     <FormWrapper>
                         <Heading>{login ? <h1>Welcome back</h1> : <h1>Create Account</h1>}</Heading>
-                        {login ? null : <InputCont> <Input onChange={(e) => setUsername(e.target.value)}></Input><Label>name</Label></InputCont>} 
-                        <InputCont><Input onChange={(e) => setEmail(e.target.value)}></Input><Label>email</Label></InputCont>
-                        <InputCont><Input onChange={(e) => setPassword(e.target.value)} ></Input><Label>password</Label></InputCont>
+                        {login ? null : <InputCont> <Input onChange={(e) => setUsername(e.target.value)} placeholder="name"></Input></InputCont>}
+                        <InputCont><Input onChange={(e) => setEmail(e.target.value)} placeholder="email"></Input></InputCont>
+
+                        {(errorMessage === "User already exists with that email" & !login) ? <Error>User already exists with that email</Error> 
+                        : (errorMessage === "Incorrect email" & login) ? 
+                        <Error>Incorrect email</Error> : null}
+
+                        <InputCont><Input onChange={(e) => setPassword(e.target.value)} placeholder="password" ></Input></InputCont>
+                        {(errorMessage === "Incorrect password" & login) ? 
+                        <Error>Incorrect password</Error> : null}
                         {login ? null :
                             <AgreementCont>
                                 <Checkbox type="checkbox"></Checkbox>
@@ -177,7 +221,7 @@ function Login() {
                             </AgreementCont>
                         }
                         <ButtonCont>
-                            <Button onClick={handler} color="99A9B9" text="white">{login ? "Sign in" : "Sign Up"}</Button>
+                            <Button onClick={handler} color="99A9B9" text="white">{login ? "SIGN IN" : "SIGN UP"}</Button>
                             {/* <Button border="99A9B9" text="black">Sign In</Button> */}
                         </ButtonCont>
                         <LoginRegisterLink><Choice onClick={LoginTrueFalse}>{login ? "Need to create an account?" : "Already have an account?"}</Choice></LoginRegisterLink>

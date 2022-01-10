@@ -5,6 +5,9 @@ import Login from "./pages/Login"
 import Basket from "./pages/Basket"
 import UploadImageTest from "./pages/UploadImageTest";
 import ProductPage from "./pages/ProductPage";
+import LoginSuccess from "./pages/LoginSuccess";
+import RegisterSuccess from "./pages/RegisterSuccess";
+
 
 function App() {
   return (
@@ -16,6 +19,8 @@ function App() {
         <Route path="/uploadimage" element={<UploadImageTest/>}></Route>
 
         <Route path="/productpage" element={<ProductPage/>}></Route>
+        <Route path="/loginsuccess" element={<LoginSuccess/>}></Route>
+        <Route path="/registersuccess" element={<RegisterSuccess/>}></Route>
         {/* <Route path="/basket" element={<Basket/>}></Route> */}
 
 
