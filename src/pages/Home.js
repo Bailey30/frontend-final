@@ -1,7 +1,12 @@
 import React, {useEffect, useState} from "react"
 import styled from "styled-components" 
 import head from "../images/newhead.jpg"
-import logo from "../images/smllogo.png"
+import logo from "../images/lglogo.png"
+import cup from "../images/cups.jpg"
+import plate from "../images/plates.jpg"
+import bowl from "../images/bowls.jpg"
+import vase from "../images/vases.jpg"
+
 
 const Container = styled.div``;
 
@@ -94,18 +99,82 @@ background-color: red;
 
 const Logo = styled.div`
 background-image: url(${logo});
+width: 70px;
+height: 70px;
+padding: 20px;
+margin-left:25vh;
 `;
 const Spacer = styled.div`
+display:flex;
+flex-direction: column;
+justify-content: center;
+width: 100%;
+height: 20vh;
+margin-left: 65vh;
+padding:10vh;
+`;
+
+const Text = styled.div`
+font-family: Lato;
+font-size: 20px;
+color: #272c33;
 `;
 const Catagories = styled.div`
+display:flex;
+flex-direction: flex-row;
+justify-content: space-around;
+`;
+
+const Boxes = styled.div`
+// display: flex;
+// flex-direction: column;
+// justify-content: flex-end;
+background-color:red;
+margin-top: 40vh;
+width: 35vh;
+height: 20vh;
+margin-left: 5vh;
+margin-bottom: 20px;
+
+
+
+background-color: white;
 `;
 const Bowls = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+margin:10px;
+background-image: url(${bowl});
+width: 300px;
+height: 400px;
 `;
 const Plates = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+margin:10px;
+background-image: url(${plate});
+width: 300px;
+height: 400px;
 `;
 const Cups = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+margin:10px;
+background-image: url(${cup});
+width: 300px;
+height: 400px;
 `;
 const Vases = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+margin:10px;
+background-image: url(${vase});
+width: 300px;
+height: 400px;
 `;
 
 
@@ -120,7 +189,22 @@ function Home() {
       </Head>
       <Spacer>
         <Logo />
+        <Text>Browse by catagory or follow the links above</Text>
       </Spacer>
+      <Catagories>
+        <Plates>
+        <Boxes />
+        </Plates>
+        <Cups>
+          <Boxes />
+        </Cups>
+        <Bowls>
+        <Boxes />
+        </Bowls>
+        <Vases>
+        <Boxes />
+        </Vases>
+      </Catagories>
 
     </Container>
   )
