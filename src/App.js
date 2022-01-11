@@ -7,6 +7,7 @@ import UploadImageTest from "./pages/UploadImageTest";
 import ProductPage from "./pages/ProductPage";
 import LoginSuccess from "./pages/LoginSuccess";
 import RegisterSuccess from "./pages/RegisterSuccess";
+import About from "./pages/About";
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
         {/* <Route path="/basket" element={<Basket/>}></Route> */}
 
 
-        {/* <Route path="/about" element={<About/>}></Route> */}
+        <Route path="/about" element={<About/>}></Route>
   
       </Routes>
 

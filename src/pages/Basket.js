@@ -4,20 +4,16 @@ import Navbar from '../components/Navbar';
 
 const Container = styled.div`
 `
-
 const Button = styled.button`
 color: ${props => props.color}`
-
-
-
-
-
-
 
 function Basket() {
     return (
         <Container>
             <Navbar />
+            <div>
+
+            </div>
         </Container>
     )
 }

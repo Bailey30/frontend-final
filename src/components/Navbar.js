@@ -59,7 +59,7 @@ function Navbar() {
             <Link to='/productpage'>
                 <NavButton>SELL</NavButton>
             </Link>
-            <Link to='/about' style={{'min-width': 'fit-content'}}>
+            <Link to='/about'>
                 <NavButton>ABOUT US</NavButton>
             </Link>
             <Link to='/basket'>
