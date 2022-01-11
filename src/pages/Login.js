@@ -7,11 +7,11 @@ const Container = styled.div``
 
 
 
-function LoginPage() {
+function LoginPage({user, setUser}) {
   return (
     <Container>
       <Navbar/>
-      <Login/>
+      <Login user={user} setUser={setUser}/>
     </Container>
   )
 }

@@ -5,19 +5,12 @@ import Navbar from '../components/Navbar';
 const Container = styled.div`
 `
 
-const Button = styled.button`
-color: ${props => props.color}`
-
-
-
-
-
-
-
-function Basket() {
+function Basket({user, setUser}) {
     return (
         <Container>
-            <Navbar />
+            <Navbar user={user} setUser={setUser}/>
+
+           
         </Container>
     )
 }

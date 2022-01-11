@@ -143,14 +143,14 @@ color: gray;`
 
 
 
-function Login() {
+function Login({user, setUser}) {
     const navigate = useNavigate()
     const [login, setLogin] = useState(true)
-    const [user, setUser] = useState({
-        username: "",
-        userId: "",
-        email: ""
-    })
+    // const [user, setUser] = useState({
+    //     username: "",
+    //     userId: "",
+    //     email: ""
+    // })
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [username, setUsername] = useState()
@@ -173,6 +173,7 @@ function Login() {
             }
         } catch (error) { }
     };
+    
 
     useEffect(() => {
      if(loggedIn  && login) {

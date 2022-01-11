@@ -1,8 +1,8 @@
-export const tokenFetch = async (setUser) => {
+export const TokenFetch = async (setUser) => {
   try {
     const response = await fetch(`${process.env.REACT_APP_REST_API}users/user`, {
       method: "GET",
-      headers: { Authorization: `Bearer ${localStorage.getItem("myToken")}` },
+      headers: { "Authorization": `Bearer ${localStorage.getItem("myToken")}` },
     });
     const data = await response.json();
     setUser({
@@ -92,5 +92,31 @@ export const getProductFetch = async (setFetchedProductInfo) => {
 
   } catch (error) {
     console.log(error);
+  }
+}
+
+export const UploadProductFetch = async (productData) => {
+  try {
+      const res = await fetch("http://localhost:5000/products/add", {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+              userId: productData.userId,
+              title: productData.title,
+              desc: productData.desc,
+              img: productData.img,
+              categories: productData.categories,
+              color: productData.color,
+              price: productData.price
+
+          })
+
+      })
+      const data = await res.json()
+   console.log("product uploaded", data);
+
+  }
+  catch (error) {
+      console.log(error);
   }
 }

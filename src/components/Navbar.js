@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const NavComponent = styled.div`
   
@@ -46,28 +46,36 @@ const Title = styled.h3`
     font-size: 24px;
 `;
 
-function Navbar() {
+function Navbar({ user, setUser }) {
+
+    const logOut = () => {
+        localStorage.removeItem("myToken")
+        setUser("")
+        console.log(user);
+        // setLoggedIn(false)
+    }
+
     return (
         <NavComponent>
-            <Link to='/' style={{'textDecoration': 'none'}}>
-            <Title>POTTREE</Title>
+            <Link to='/' style={{ 'textDecoration': 'none' }}>
+                <Title>POTTREE</Title>
             </Link>
             <Buttons>
-            <Link to='/productpage'>
-                <NavButton>SHOP</NavButton>
-            </Link>
-            <Link to='/productpage'>
-                <NavButton>SELL</NavButton>
-            </Link>
-            <Link to='/about' style={{'min-width': 'fit-content'}}>
-                <NavButton>ABOUT US</NavButton>
-            </Link>
-            <Link to='/basket'>
-                <NavButton>BASKET</NavButton>
-            </Link>
-            <Link to='/login'>
-                <NavButton>LOGIN</NavButton>
-            </Link>
+                <Link to='/productpage'>
+                    <NavButton>SHOP</NavButton>
+                </Link>
+                <Link to='/uploadproduct'>
+                    <NavButton>SELL</NavButton>
+                </Link>
+                <Link to='/about' style={{ 'min-width': 'fit-content' }}>
+                    <NavButton>ABOUT US</NavButton>
+                </Link>
+                <Link to='/basket'>
+                    <NavButton>BASKET</NavButton>
+                </Link>
+                {!user ? <Link to="/login"><NavButton>LOGIN</NavButton></Link> : <NavButton
+                    onClick={() => logOut()}
+                >LOG OUT</NavButton>}
             </Buttons>
         </NavComponent>
     )

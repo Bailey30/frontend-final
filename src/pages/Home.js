@@ -39,7 +39,7 @@ const Vases = styled.div`
 `;
 
 
-function Home() {
+function Home({user, setUser}) {
   return(
     <Container>
       <Head>
