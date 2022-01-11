@@ -7,16 +7,18 @@ import UploadImageTest from "./pages/UploadImageTest";
 import ProductPage from "./pages/ProductPage";
 import LoginSuccess from "./pages/LoginSuccess";
 import RegisterSuccess from "./pages/RegisterSuccess";
-
+import ProductDetails from "./pages/ProductDetails";
+import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
-        <Route path="/basket" element={<Basket/>}></Route>
+        <Route path="/basket" element={<ProductDetails/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/uploadimage" element={<UploadImageTest/>}></Route>
+        <Route path="/favorites" element={<FavoritesPage/>}></Route>
 
         <Route path="/productpage" element={<ProductPage/>}></Route>
         <Route path="/loginsuccess" element={<LoginSuccess/>}></Route>

@@ -98,7 +98,7 @@ function ProductDetails() {
 
             <Div>
             <DetailsContainer>
-                <ProductImg src={"https://media.istockphoto.com/photos/a-bowl-on-the-wood-background-picture-id1183932238?b=1&k=20&m=1183932238&s=170667a&w=0&h=3mQMMpYPkok7HeCYJjXiyFfxdZrSKE1f9LAU2rA0eIw="}/>
+                <ProductImg src={"https://media.istockphoto.com/photos/empty-unpainted-clay-pot-picture-id1277495985?b=1&k=20&m=1277495985&s=170667a&w=0&h=VXKdN57Ah20Vm_zER4EAaTGlamfJEfjPYy4jP1eBI2w="}/>
                 <ProductInfo>
                     <ProductName><h1>Product Name</h1></ProductName>
                     <Description><b>Description:</b> fehid hfhgb vdfgd sgdgg dgdr gdggfgfgfht htthth tgurvg urb</Description>
