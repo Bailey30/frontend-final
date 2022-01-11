@@ -61,6 +61,7 @@ function Navbar({ user, setUser }) {
                 <Title>POTTREE</Title>
             </Link>
             <Buttons>
+
                 <Link to='/productpage'>
                     <NavButton>SHOP</NavButton>
                 </Link>
@@ -76,6 +77,8 @@ function Navbar({ user, setUser }) {
                 {!user ? <Link to="/login"><NavButton>LOGIN</NavButton></Link> : <NavButton
                     onClick={() => logOut()}
                 >LOG OUT</NavButton>}
+
+        
             </Buttons>
         </NavComponent>
     )

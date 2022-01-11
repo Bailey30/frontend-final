@@ -10,6 +10,8 @@ import ProductPage from "./pages/ProductPage";
 import LoginSuccess from "./pages/LoginSuccess";
 import RegisterSuccess from "./pages/RegisterSuccess";
 import ProductDetails from "./pages/ProductDetails";
+import About from "./pages/About";
+
 
 
 function App() {
@@ -38,7 +40,7 @@ useEffect(() => {
         {/* <Route path="/basket" element={<Basket/>}></Route> */}
 
 
-        {/* <Route path="/about" element={<About/>}></Route> */}
+        <Route path="/about" element={<About/>}></Route>
   
       </Routes>
 
