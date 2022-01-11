@@ -5,10 +5,11 @@ import ProductFeed from "../components/ProductFeed"
 
 const Container = styled.div``
 
-function ProductPage() {
+function ProductPage({user, setUser}) {
+  console.log(user)
   return (
     <Container>
-      <Navbar style={{"z-index": 100}}/>
+      <Navbar style={{"z-index": 100}} user={user} setUser={setUser}/>
       <ProductFeed/>
     </Container>
   )
