@@ -101,6 +101,7 @@ export const UploadProductFetch = async (productData) => {
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify({
+              username: productData.username,
               userId: productData.userId,
               title: productData.title,
               desc: productData.desc,
@@ -118,5 +119,24 @@ export const UploadProductFetch = async (productData) => {
   }
   catch (error) {
       console.log(error);
+  }
+}
+
+
+////product details fetch
+export const GetProductDetailsFetch = async (id, setProduct) => {
+  try {
+    const res = await fetch("http://localhost:5000/products/find/"+id, {
+      method: "GET",
+      headers: { "Authorization": `Bearer ${localStorage.getItem("myToken")}` }
+    })
+    const data = await res.json()
+    console.log(data);
+    setProduct(data)
+
+
+
+  } catch (error) {
+    console.log(error);
   }
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { loginFetch, signUpFetch } from "../requestMethods"
 import { mobile, tablet } from "../responsive"
-import {useNavigate} from "react-router"
+import { useNavigate } from "react-router"
 
 const Container = styled.div`
 display: flex;
@@ -143,7 +143,7 @@ color: gray;`
 
 
 
-function Login({user, setUser}) {
+function Login({ user, setUser }) {
     const navigate = useNavigate()
     const [login, setLogin] = useState(true)
     // const [user, setUser] = useState({
@@ -167,35 +167,41 @@ function Login({user, setUser}) {
         console.log(`login: ${login}`);
         try {
             if (!login) {
-                signUpFetch(username, email, password, setUser, setLoggedIn,setErrorMessage);
+                signUpFetch(username, email, password, setUser, setLoggedIn, setErrorMessage);
             } else {
-                loginFetch(email, password, setUser, setLoggedIn,setErrorMessage);
+                loginFetch(email, password, setUser, setLoggedIn, setErrorMessage);
             }
         } catch (error) { }
     };
-    
 
     useEffect(() => {
-     if(loggedIn  && login) {
-            console.log(`user: ${user.userId}`);
-         console.log(login);
-        console.log(`logged in: ${loggedIn}`)
-
-        navigate("/loginsuccess")
-        console.log("login navigate");
-    } else if (loggedIn && login === false) {
-        console.log(user.userId);
-         console.log(login);
-        console.log(`logged in: ${loggedIn}`)
-
-        navigate("/registersuccess")
-        console.log("register navigate");
-    } else {
-        console.log(`logged in: ${loggedIn}`)
-    }
+      if(loggedIn) {
+          navigate("/")
+      }
     }, [loggedIn])
 
-    
+
+    // useEffect(() => {
+    //     if (loggedIn && login) {
+    //         console.log(`user: ${user.userId}`);
+    //         console.log(login);
+    //         console.log(`logged in: ${loggedIn}`)
+
+    //         navigate("/loginsuccess")
+    //         console.log("login navigate");
+    //     } else if (loggedIn && login === false) {
+    //         console.log(user.userId);
+    //         console.log(login);
+    //         console.log(`logged in: ${loggedIn}`)
+
+    //         navigate("/registersuccess")
+    //         console.log("register navigate");
+    //     } else {
+    //         console.log(`logged in: ${loggedIn}`)
+    //     }
+    // }, [loggedIn])
+
+
 
 
 
@@ -208,13 +214,13 @@ function Login({user, setUser}) {
                         {login ? null : <InputCont> <Input onChange={(e) => setUsername(e.target.value)} placeholder="name"></Input></InputCont>}
                         <InputCont><Input onChange={(e) => setEmail(e.target.value)} placeholder="email"></Input></InputCont>
 
-                        {(errorMessage === "User already exists with that email" & !login) ? <Error>User already exists with that email</Error> 
-                        : (errorMessage === "Incorrect email" & login) ? 
-                        <Error>Incorrect email</Error> : null}
+                        {(errorMessage === "User already exists with that email" & !login) ? <Error>User already exists with that email</Error>
+                            : (errorMessage === "Incorrect email" & login) ?
+                                <Error>Incorrect email</Error> : null}
 
                         <InputCont><Input onChange={(e) => setPassword(e.target.value)} placeholder="password" ></Input></InputCont>
-                        {(errorMessage === "Incorrect password" & login) ? 
-                        <Error>Incorrect password</Error> : null}
+                        {(errorMessage === "Incorrect password" & login) ?
+                            <Error>Incorrect password</Error> : null}
                         {login ? null :
                             <AgreementCont>
                                 <Checkbox type="checkbox"></Checkbox>

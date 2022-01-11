@@ -4,12 +4,24 @@ import axios from "axios"
 import Navbar from "../components/Navbar"
 import { UploadProductFetch } from "../requestMethods"
 
-const Container = styled.div``
+const Container = styled.div`
+position: relative;
+overflow: hidden;`
 
 const Line = styled.div`
 width: 93vw;
 margin: 0 auto;
 border-bottom: 1px solid lightgray;`
+
+
+
+// const Mask = styled.div`
+// height: 100%;
+// width: 100%;
+// position: absolute;
+// background: linear-gradient(rgba(225,225,0225, 0.5), rgba(274,135,014, 0.5));
+// z-index: -2;`
+
 
 const Heading = styled.h1`
 margin: 0 10px;;`
@@ -26,14 +38,16 @@ width: 10vw;
 background-color: ${props => props.background};
 border: 2px solid black;
 color: ${props => props.color};
-position: relative;`
+position: relative;
+cursor: pointer;`
 
 const Image = styled.img``
 
 const UploadComponent = styled.div`
 width: 50vw;
 margin: 2vh auto;
-
+background: white;
+padding: 10px 20px;
 `
 
 const Form = styled.form`
@@ -96,6 +110,7 @@ margin-right: 10px;`
 function UploadProduct({ user, setUser }) {
     const [imageSelected, setImageSelected] = useState("")
     const [productData, setProductData] = useState({
+        username: "",
         userId: "",
         title: "",
         img: "",
@@ -106,23 +121,6 @@ function UploadProduct({ user, setUser }) {
     const [previewImage, setPreviewImage] = useState("")
 
 
-    //////checkboxes for categories
-
-    const categories = ["Bowl", "Plate", "Vase", "Sculpture", "Ceramic", "Other"]
-    const [checkedState, setCheckedState] = useState(
-        new Array(categories.length).fill(false)
-    )
-
-    const handleChange = (position) => {
-        const updatedCheckedState = checkedState.map((item, index) =>
-            index === position ? !item : item
-            //if the index of the state array matches the index from the cateogory array the state in the state array will change to the opposite of what it is currently
-            //matching two indexes is a useful way to apply change to something when it is selected
-        )
-        setCheckedState(updatedCheckedState)
-        // console.log(checkedState)
-    }
-    //////image uploading
 
 
     const uploadImage = async (image) => {
@@ -157,39 +155,66 @@ function UploadProduct({ user, setUser }) {
 
         console.log(e.target.files);
     }
-    
+
     useEffect(() => {
         console.log(user);
         setProductData({
             ...productData,
             userId: user.userId,
-            
+            username: user.username,
+
         })
     }, [])
-    
-    
-    
+
+    //////checkboxes for categories
+
+    const categories = ["Bowl", "Plate", "Vase", "Sculpture", "Ceramic", "Mug", "Other"]
+    const [checkedState, setCheckedState] = useState(
+        new Array(categories.length).fill(false)
+    )
+
+    const handleChange = (position) => {
+        const updatedCheckedState = checkedState.map((item, index) =>
+            index === position ? !item : item
+            //if the index of the state array matches the index from the cateogory array the state in the state array will change to the opposite of what it is currently
+            //matching two indexes is a useful way to apply change to something when it is selected
+        )
+        setCheckedState(updatedCheckedState)
+        // console.log(checkedState)
+    }
+    //////image uploading
+
+
     /////upload data to db
-    
-    const uploadData = (e) => {
+
+    const UploadData = (e) => {
         e.preventDefault()
         const testArray = []
         checkedState.filter((item, index) => {
             return item === true && testArray.push(categories[index])
         })
+        console.log(testArray);
         setProductData({
             ...productData,
-            userId: user.userId,
-            categories: testArray
+            username: user.username,
+            categories: testArray,
         })
-        UploadProductFetch(productData) 
-        console.log(productData);
-        console.log(user)
-    }  
+
+
+
+            (console.log("uploaded") &
+                console.log(productData))
+        // console.log(user)
+    }
+    useEffect(() => {
+        UploadProductFetch(productData)
+    }, [productData.categories])
+
     useEffect(() => {
         setProductData({
             ...productData,
-            userId: user.userId
+            userId: user.userId,
+            username: user.username,
         })
     }, [user])
     useEffect(() => {
@@ -198,72 +223,75 @@ function UploadProduct({ user, setUser }) {
         console.log(user);
 
 
-    }, [productData])
-    
+    }, [productData, checkedState])
+
     // const publicId = "ml5dhmg3m9yh8ulljjhf"
     return (
         <Container>
-            <Navbar user={user} setUser={setUser}/>
+
+            <Navbar user={user} setUser={setUser} />
             <Line></Line>
-            <UploadComponent>
-                <Heading>Upload a product to sell</Heading>
-                <Cont>
-                    <Label for="name">Name</Label>
-                    <Input type="text" id="name" onChange={(e) => setProductData({ ...productData, title: e.target.value })}></Input>
-                </Cont>
+            
+            {/* <Mask></Mask> */}
+                <UploadComponent>
+                    <Heading>Upload a product to sell</Heading>
+                    <Cont>
+                        <Label for="name">Name</Label>
+                        <Input type="text" id="name" onChange={(e) => setProductData({ ...productData, title: e.target.value })}></Input>
+                    </Cont>
 
 
-                <Cont >
+                    <Cont >
 
-                    <Label>Image</Label>
-                    <ImageCont>
+                        <Label>Image</Label>
+                        <ImageCont>
 
-                        {/* <PreviewImage src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${previewImage}.jpg`}></PreviewImage> */}
-                        <PreviewImage src={previewImage}></PreviewImage>
+                            {/* <PreviewImage src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${previewImage}.jpg`}></PreviewImage> */}
+                            <PreviewImage src={previewImage}></PreviewImage>
 
-                        <ImageButtonCont>
+                            <ImageButtonCont>
 
-                            <Button
-                                // onClick={uploadImage} 
-                                background="white" color="black">
-                                <AddImage>ADD IMAGE</AddImage><ImageInput type="file" onChange={(e) => imageHandler(e)}></ImageInput>
-                            </Button>
-                        </ImageButtonCont>
-                    </ImageCont>
-                    {/* <Image src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${publicId}.jpg`}></Image> */}
-                    {/* <Image src="http://res.cloudinary.com/dthuzb3gx/image/upload/v1641546000/srzyakrwrpcwrt0ylwfu.jpg"></Image> */}
+                                <Button
+                                    // onClick={uploadImage} 
+                                    background="white" color="black">
+                                    <AddImage>ADD IMAGE</AddImage><ImageInput type="file" onChange={(e) => imageHandler(e)}></ImageInput>
+                                </Button>
+                            </ImageButtonCont>
+                        </ImageCont>
+                        {/* <Image src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${publicId}.jpg`}></Image> */}
+                        {/* <Image src="http://res.cloudinary.com/dthuzb3gx/image/upload/v1641546000/srzyakrwrpcwrt0ylwfu.jpg"></Image> */}
 
-                </Cont>
-                <Cont>
-                    <Label>Categories</Label>
-                    <BoxChoices>
-                        {categories.map((cat, index) => {
-                            return <CatCont key={index}>
-                                <Test id={cat} name={cat} value={cat} type="checkbox"
-                                    checked={checkedState[index]}
-                                    onChange={() => handleChange(index)}
-                                />
-                                <BoxLabel>{cat}</BoxLabel>
-                            </CatCont>
-                        })}
-                    </BoxChoices>
+                    </Cont>
+                    <Cont>
+                        <Label>Categories</Label>
+                        <BoxChoices>
+                            {categories.map((cat, index) => {
+                                return <CatCont key={index}>
+                                    <Test id={cat} name={cat} value={cat} type="checkbox"
+                                        checked={checkedState[index]}
+                                        onChange={() => handleChange(index)}
+                                    />
+                                    <BoxLabel>{cat}</BoxLabel>
+                                </CatCont>
+                            })}
+                        </BoxChoices>
 
-                </Cont>
+                    </Cont>
 
-                <Cont>
-                    <Label for="desc">Description</Label>
-                    <Input type="text" id="desc" onChange={(e) => setProductData({ ...productData, desc: e.target.value })}></Input>
-                </Cont>
-                <Cont>
-                    <Label for="desc">Price</Label>
-                    <Input type="text" id="price" onChange={(e) => setProductData({ ...productData, price: e.target.value })}></Input>
-                </Cont>
+                    <Cont>
+                        <Label for="desc">Description</Label>
+                        <Input type="text" id="desc" onChange={(e) => setProductData({ ...productData, desc: e.target.value })}></Input>
+                    </Cont>
+                    <Cont>
+                        <Label for="desc">Price</Label>
+                        <Input type="text" id="price" onChange={(e) => setProductData({ ...productData, price: e.target.value })}></Input>
+                    </Cont>
 
-                <Button onClick={uploadData} background="black" color="white">POST AD</Button>
+                    <Button onClick={UploadData} background="black" color="white">POST AD</Button>
 
 
-            </UploadComponent>
-
+                </UploadComponent>
+            
 
         </Container>
     )

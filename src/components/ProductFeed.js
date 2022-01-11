@@ -91,8 +91,26 @@ function ProductFeed() {
     const [fetchedProductData, setFetchedProductData] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
     const [sort, setSort] = useState("")
-    console.log(sort);
+    const [filters, setFilters] = useState({})
 
+    const handleFilters = (e)=> {
+        const value = e.target.value
+        setFilters({
+            ...filters,
+            [e.target.name]: value ///name = prop
+        })
+        console.log(e.target)
+    }
+
+    useEffect(() => {
+        filters && setFilteredProducts(
+          fetchedProductData.filter((item) =>
+            Object.entries(filters).every(([key, value]) =>
+              item[key].includes(value)
+            )
+          )
+        )
+      }, [fetchedProductData, filters])
 
     const fetchProducts = () => {
         getProductFetch(setFetchedProductData)
@@ -120,6 +138,8 @@ function ProductFeed() {
             console.log(filteredProducts);
     }, [sort])
 
+
+
     return (
         <Container>
             <SectionCont>
@@ -129,12 +149,15 @@ function ProductFeed() {
                     <Icon><SortIcon /></Icon>
                     <CategoryCont>
                         <Category>Category:</Category>
-                        <Select onChange={(e) => setSort(e.target.value)}>
+                        <Select name="category" onChange={(e) => handleFilters(e.target.value)}>
                             {/* <Option value="newest">Newest</Option> */}
-                            <Option value="asc">Cups</Option>
-                            <Option value="desc">Vases</Option>
-                            <Option value="desc">Ceramic</Option>
-                            <Option value="desc">Bowls</Option>
+                            <Option >Cups</Option>
+                            <Option>Vases</Option>
+                            <Option>Ceramic</Option>
+                            <Option>Bowls</Option>
+                            <Option>Plates</Option>
+                            <Option>Sculpture</Option>
+                            <Option>Other</Option>
                         </Select>
                     </CategoryCont>
                     <PriceCont>

@@ -98,12 +98,15 @@ function Product({ item }) {
             {/* <Image src={img}></Image> 
             <LinkCont>fdgdfg</LinkCont> */}
             <ImageCont>
-                <Image src={img}></Image>
-                {/* <Image src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${img}.jpg`}></Image> */}
+                {/* <Image src={img}></Image> */}
+                <Image src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${img}.jpg`}></Image>
                 <LinkCont>
                 <Icon><FavoriteBorderIcon style={{"color": "black", "fontSize": "30px"}}/></Icon>
                 <Icon><ShoppingCartIcon style={{"color": "black", "fontSize": "30px"}}/></Icon>
-                <Icon><InfoIcon style={{"color": "black", "fontSize": "30px"}}/></Icon>
+                <Link to={`/product/${item._id}`}>
+                    <Icon><InfoIcon style={{"color": "black", "fontSize": "30px"}}/></Icon>
+                    </Link>
+
                 </LinkCont>
             </ImageCont>
 
