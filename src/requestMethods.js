@@ -84,7 +84,6 @@ export const getProductFetch = async (setFetchedProductInfo) => {
   try {
     const res = await fetch(`${process.env.REACT_APP_REST_API}products`, {
       method: "GET",
-      headers: { "Authorization": `Bearer ${localStorage.getItem("myToken")}` }
     })
     const data = await res.json()
     console.log(data);
@@ -130,7 +129,6 @@ export const GetProductDetailsFetch = async (id, setProduct) => {
   try {
     const res = await fetch(`${process.env.REACT_APP_REST_API}products/find/${id}`, {
       method: "GET",
-      headers: { "Authorization": `Bearer ${localStorage.getItem("myToken")}` }
     })
 
     const data = await res.json()
@@ -161,6 +159,45 @@ export const GetBasketFetch = async (user, setBasket) => {
     setBasket(data)
   }
   catch (error) {
+    console.log(error);
+  }
+}
+
+export const AddToBasketFetch = async (user, item) => {
+  try {
+    const res = await fetch(`${process.env.REACT_APP_REST_API}baskets/addToBasket`, {
+      method: "PUT",
+      headers: { "Content-type": "application/json"  },
+      body: JSON.stringify({
+        userId: user.userId,
+        img: item.img,
+        productId: item._id,
+        title: item.title,
+        desc: item.desc,
+        categories: item.categories,
+        price: item.price
+      })
+    })
+    const data = await res.json()
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const RemoveFromBasketFetch = async (user, item) => {
+  try {
+    const res = await fetch(`${process.env.REACT_APP_REST_API}baskets/removefrombasket`, {
+      method: "PUT",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({
+        userId: user.userId,
+        productId: item._id
+      })
+    })
+    const data = await res.json()
+    console.log(data);
+  } catch (error) {
     console.log(error);
   }
 }

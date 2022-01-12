@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from "styled-components";
 import { Link } from "react-router-dom"
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Badge from '@mui/material/Badge';
+import IconButton from '@mui/material/IconButton';
 
 const NavComponent = styled.div`
   
@@ -24,6 +27,7 @@ const Buttons = styled.div`
     width: 25vw;
     justify-content: space-evenly;
     align-items: center;
+    position: relative;
     
 `;
 
@@ -37,6 +41,7 @@ const NavButton = styled.button`
         border-bottom: 1px solid black;
     }
     font-size: 12px;
+    /* position: relative; */
 `;
 
 const Title = styled.h3`
@@ -45,6 +50,18 @@ const Title = styled.h3`
     letter-spacing: 1px;
     font-size: 24px;
 `;
+
+
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 7,
+    // border: `2px solid ${theme.palette.background.paper}`,
+    background: "blue",
+    padding: '0 4px',
+  },
+}));
 
 function Navbar({ user, setUser }) {
 
@@ -72,13 +89,16 @@ function Navbar({ user, setUser }) {
                     <NavButton>ABOUT US</NavButton>
                 </Link>
                 <Link to='/basket'>
-                    <NavButton>BASKET</NavButton>
+                    <NavButton>
+                        BASKET
+                    </NavButton>
+
                 </Link>
                 {!user ? <Link to="/login"><NavButton>LOGIN</NavButton></Link> : <Link to=""><NavButton
                     onClick={() => logOut()}
                 >LOG OUT</NavButton></Link>}
 
-        
+
             </Buttons>
         </NavComponent>
     )

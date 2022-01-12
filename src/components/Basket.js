@@ -7,6 +7,7 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import BasketItem from "../components/BasketItem"
+const _ = require('lodash');
 const { GetBasketFetch } = require("../requestMethods")
 
 const Container = styled.div`
@@ -56,16 +57,26 @@ width: fit-content;
 margin: 0 10px;
 `
 
-function Basket({ user }) {
+function Basket({ user, prices, setPrices }) {
   const [basket, setBasket] = useState([])
+  const [subTotal, setSubTotal] = useState()
 
   useEffect(() => {
     GetBasketFetch(user, setBasket)
     console.log(user)
     console.log(basket)
+    console.log(prices)
   }, [user])
 
+  let total = subTotal + (prices.length * 2.5)
+    let shipping = prices.length * 2.5
 
+  useEffect(() => {
+    setSubTotal(_.sum(prices))
+    
+  }, [])
+
+ 
 
   return (
     <Container>
@@ -75,15 +86,15 @@ function Basket({ user }) {
         <LeftCont>
           {basket ? basket.map((item, index) => {
             //  return console.log(test);
-            return <BasketItem item={item} index={index} />
+            return <BasketItem item={item} index={index} setBasket={setBasket} basket={basket} user={user}/>
           }) :
             null}
         </LeftCont>
         <RightCont>
           <Totals>
-            <Subtotal><Text>Subtotal</Text><Amount>100</Amount></Subtotal>
-            <Shipping><Text>Shipping</Text><Amount>10</Amount></Shipping>
-            <Total><Text>Total</Text><Amount>110</Amount></Total>
+            <Subtotal><Text>Subtotal</Text><Amount>£ {subTotal}</Amount></Subtotal>
+            <Shipping><Text>Shipping</Text><Amount>£ {shipping}</Amount></Shipping>
+            <Total><Text>TOTAL</Text><Amount>£ {total}</Amount></Total>
           </Totals>
         </RightCont>
       </Wrapper>

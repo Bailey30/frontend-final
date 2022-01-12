@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
+const { RemoveFromBasketFetch } = require("../requestMethods")
 
 const Container = styled.div`
 border: 1px solid black;
@@ -25,18 +26,28 @@ height: 50px;`
 
 
 
-function BasketItem({item, index}) {
+function BasketItem({ item, index, setBasket , basket, user}) {
+
+
+  const removeFromBasket = () => {
+    RemoveFromBasketFetch(user, item)
+    const storedBasket = [...basket]
+    storedBasket.splice(index, 1)
+    setBasket(storedBasket)
+    console.log(item._id)
+  }
+
   return (
     <Container>
       <ImageCont>
-          <Image src={item.img}></Image>
+        <Image src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${item.img}.jpg`}></Image>
       </ImageCont>
       <RightCont>
-          <InfoCont>
-              <Name>{item.title}</Name>
-              <Price>£ {item.price}</Price>
-          </InfoCont>
-          <Button>REMOVE FROM BASKET</Button>
+        <InfoCont>
+          <Name>{item.title}</Name>
+          <Price>£ {item.price}</Price>
+        </InfoCont>
+        <Button onClick={removeFromBasket}>REMOVE FROM BASKET</Button>
       </RightCont>
     </Container>
   )

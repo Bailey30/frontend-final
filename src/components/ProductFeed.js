@@ -88,7 +88,7 @@ border: none;`
 
 const Option = styled.option``
 
-function ProductFeed() {
+function ProductFeed({user, prices, setPrices}) {
     const [fetchedProductData, setFetchedProductData] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
     const [sort, setSort] = useState("")
@@ -210,11 +210,11 @@ function ProductFeed() {
 
                     {sort || filters  ?
                         filteredProducts.map((item, index) => {
-                            return <Product item={item} index={index} />
+                            return <Product item={item} index={index} user={user} prices={prices} setPrices={setPrices}/>
                         })
                         :
                         fetchedProductData.map((item, index) => {
-                            return <Product item={item} index={index} />
+                            return <Product item={item} index={index} user={user} prices={prices} setPrices={setPrices}/>
                         })
                     }
 

@@ -13,12 +13,12 @@ border-bottom: 1px solid gray;
 margin: 0 auto;`
 
 
-function BasketPage({ user, setUser }) {
+function BasketPage({ user, setUser, prices, setPrices }) {
     return (
         <Container>
                 <Navbar user={user} setUser={setUser} />
                 <Line></Line>
-                <Basket user={user}/>
+                <Basket user={user} prices={prices} setPrices={setPrices}/>
             {/* <Wrapper>
                 <LeftCont>
                     <Basket user={user} />

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import styled from 'styled-components';
 import { useLocation } from "react-router-dom"
-const { GetProductDetailsFetch } = require("../requestMethods")
+const { GetProductDetailsFetch, AddToBasketFetch } = require("../requestMethods")
 
 const PageContainer = styled.div` 
 position: relative;  
@@ -139,7 +139,7 @@ const ButtonFavorites = styled.button`
 `;
 
 
-function ProductDetails() {
+function ProductDetails({prices, setPrices, user}) {
     const location = useLocation()
     const id = location.pathname.split("/")[2]
     const [product, setProduct] = useState({})
@@ -147,6 +147,16 @@ function ProductDetails() {
     useEffect(() => {
         GetProductDetailsFetch(id, setProduct)
     }, [id])
+
+    const AddToBasket = ()=> {
+        AddToBasketFetch(user, product)
+        // console.log(item);
+        console.log(user);
+        const storedPrices = [...prices]
+        storedPrices.push(product.price)
+        setPrices(storedPrices)
+        console.log(prices)
+    }
 
 useEffect(() => {
   console.log(product);
@@ -179,7 +189,7 @@ useEffect(() => {
                     <Price>£{product.price}</Price>
                     <AccentLine></AccentLine>
                     <ButtonDiv>
-                        <ButtonBasket>ADD TO BASKET</ButtonBasket>
+                        <ButtonBasket onClick={AddToBasket}>ADD TO BASKET</ButtonBasket>
                         <ButtonFavorites>ADD TO FAVORITES</ButtonFavorites>
                     </ButtonDiv>
                 </ProductInfo>

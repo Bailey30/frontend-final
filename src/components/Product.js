@@ -5,7 +5,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
 import { Link } from "react-router-dom";
-
+const {AddToBasketFetch} = require("../requestMethods")
 
 const Container = styled.div`
 width: 23%;
@@ -48,6 +48,7 @@ justify-content: center;
 height: 30px;
 width: 30px;
 color: blue;
+cursor: pointer;
 `
 
 // const Image = styled.img`
@@ -105,8 +106,21 @@ align-items: center;
 justify-content: space-between;`
 
 
-function Product({ item }) {
+function Product({ user, item, prices, setPrices }) {
     const { categories, desc, img, title, userId, price } = item
+
+    const AddToBasket = ()=> {
+        AddToBasketFetch(user, item)
+        console.log(item);
+        console.log(user);
+        console.log(price)
+        const storedPrices = [...prices]
+        storedPrices.push(price)
+        setPrices(storedPrices)
+        console.log(prices);
+    }
+
+
     return (
         <Container>
             {/* <Image src={img}></Image> 
@@ -117,7 +131,7 @@ function Product({ item }) {
                 <LinkCont>
                 <IconCont>
                     <Icon><FavoriteBorderIcon style={{"color": "black", "fontSize": "30px"}}/></Icon>
-                <Icon><ShoppingCartIcon style={{"color": "black", "fontSize": "30px"}}/></Icon>
+                <Icon><ShoppingCartIcon style={{"color": "black", "fontSize": "30px"}} onClick={AddToBasket}/></Icon>
                 <Link to={`/product/${item._id}`}>
                     <Icon><InfoIcon style={{"color": "black", "fontSize": "30px"}}/></Icon>
                     </Link>

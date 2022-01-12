@@ -16,6 +16,31 @@ padding: 0;
 margin: 0;
 overflow: hidden;
 `
+
+const Navbar = styled.div`
+position: absolute;
+left: 0;
+right: 0;
+height: 60px;
+/* border-bottom: 1px solid gray; */
+display: flex;
+justify-content: flex-end;`
+
+const Buttons = styled.div`
+height: 100%;
+background: none;
+margin: 20px 40px;
+`
+
+const NavButton = styled.button`
+cursor: pointer;
+height: 100%;
+margin: 0 15px;
+background: none;
+border: none;
+font-size: 12px;
+`
+
 const Title = styled.div`
 font-family: Lato;
 font-size: 110px;
@@ -89,10 +114,11 @@ overflow: hidden;
 margin: 0;
 padding: 0;
 width: 100vw;
-max-width: 100%;
 height: 100vh;
+max-width: 100%;
+/* height: 100vh; */
 position: relative;
-bottom: 30px;
+/* bottom: 30px; */
 
 background-image: url(${head});
 background-repeat: no-repeat;
@@ -188,19 +214,51 @@ background-color: #16191f;
 `;
 
 
-function Home() {
+function Home({ user, setUser }) {
+
+  const logOut = () => {
+    localStorage.removeItem("myToken")
+    setUser("")
+    console.log(user);
+    // setLoggedIn(false)
+  }
   return (
     <Container>
       <Head>
+        <Navbar>
+          <Buttons>
+
+            <Link to='/productpage'>
+              <NavButton>SHOP</NavButton>
+            </Link>
+            <Link to='/uploadproduct'>
+              <NavButton>SELL</NavButton>
+            </Link>
+            <Link to='/about' style={{ 'min-width': 'fit-content' }}>
+              <NavButton>ABOUT US</NavButton>
+            </Link>
+            <Link to='/basket'>
+              <NavButton>
+                BASKET
+              </NavButton>
+
+            </Link>
+            {!user ? <Link to="/login"><NavButton>LOGIN</NavButton></Link> : <Link to=""><NavButton
+              onClick={() => logOut()}
+            >LOG OUT</NavButton></Link>}
+
+
+          </Buttons>
+        </Navbar>
         <Title>POTTREE</Title>
 
         <H2>Buy and sell unique, beautiful, handcrafted pottery</H2>
 
-<ButtonCont>
-   <Link to="/productpage"><Button1 href="">Browse All</Button1></Link>
-        <Link to="/uploadproduct"><Button2>SELL</Button2></Link>
-</ButtonCont>
-       
+        <ButtonCont>
+          <Link to="/productpage"><Button1 href="">Browse All</Button1></Link>
+          <Link to="/uploadproduct"><Button2>SELL</Button2></Link>
+        </ButtonCont>
+
       </Head>
       <Spacer>
         <Logo />
