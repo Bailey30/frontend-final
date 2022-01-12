@@ -28,17 +28,26 @@ opacity: 0;
 /* background-color:white; */
 z-index: 100;
 display: flex;
-align-items: center;
-justify-content: center;`
+/* align-items: center; */
+justify-content: center;
+`
+
+const IconCont = styled.div`
+display: flex;
+position: absolute;
+bottom: 40%;
+opacity: 0;
+transition: all 0.4s ease;`
 
 const Icon = styled.div`
 margin: 10px;
 /* background-color: white; */
 display: flex;
-align-items: center;
+/* align-items: center; */
 justify-content: center;
 height: 30px;
 width: 30px;
+color: blue;
 `
 
 // const Image = styled.img`
@@ -67,6 +76,8 @@ overflow: hidden;
     opacity: 1
 };
 &:hover ${Image}{opacity: .5}
+&:hover ${IconCont}{bottom: 45%;
+opacity: 1;}
 `
 
 const BottomCont = styled.div`
@@ -79,11 +90,14 @@ padding: 10px 5px;
 margin-bottom: 7px;
 margin-top: 15px;
 border-bottom: 1px solid gray;
+height: 40px;
+font-style: italic;
+font-weight: 400;
 `
 
 const Price = styled.span`
 padding: 10px 5px;
-font-weight: bold;
+font-weight: 700;
 `
 const BottomLine = styled.div`
 display: flex;
@@ -101,11 +115,14 @@ function Product({ item }) {
                 {/* <Image src={img}></Image> */}
                 <Image src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${img}.jpg`}></Image>
                 <LinkCont>
-                <Icon><FavoriteBorderIcon style={{"color": "black", "fontSize": "30px"}}/></Icon>
+                <IconCont>
+                    <Icon><FavoriteBorderIcon style={{"color": "black", "fontSize": "30px"}}/></Icon>
                 <Icon><ShoppingCartIcon style={{"color": "black", "fontSize": "30px"}}/></Icon>
                 <Link to={`/product/${item._id}`}>
                     <Icon><InfoIcon style={{"color": "black", "fontSize": "30px"}}/></Icon>
                     </Link>
+                </IconCont>
+                
 
                 </LinkCont>
             </ImageCont>

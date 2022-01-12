@@ -114,6 +114,7 @@ const ButtonBasket = styled.button`
     background-color: black;
     color: white;
     border: none;
+    transition: all 0.1s ease;
     cursor: pointer;
 
     &:hover {
@@ -130,10 +131,10 @@ const ButtonFavorites = styled.button`
     border: 1px solid black;
     background-color: white;
     margin-top: 20px;
+    transition: all 0.1s ease-in ;
     cursor: pointer;
     &:hover {
-    /* background: black;
-    color: white; */
+    border: 2px solid black;
 }
 `;
 

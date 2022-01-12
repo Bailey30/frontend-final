@@ -1,30 +1,54 @@
-import React, {useEffect, useState} from "react"
-import styled from "styled-components" 
-import head from "../images/newhead.jpg"
+import React, { useEffect, useState } from "react"
+import styled from "styled-components"
+import head from "../images/newheader.avif"
 import logo from "../images/lglogo.png"
 import cup from "../images/cups.jpg"
 import plate from "../images/plates.jpg"
 import bowl from "../images/bowls.jpg"
 import vase from "../images/vases.jpg"
+import { Link } from "react-router-dom"
 
 
-const Container = styled.div``;
-
+const Container = styled.div`
+width: 100vw;
+max-width: 100%;
+padding: 0;
+margin: 0;
+overflow: hidden;
+`
 const Title = styled.div`
 font-family: Lato;
 font-size: 110px;
 margin-left: 20vh;
-padding-top: 20vh;
+/* padding-top: 20vh; */
 color: black;
+width: 50%;
+position: absolute;
+top: 20%;
 `;
 
 const H2 = styled.div`
+position: absolute;
+top: 35%;
+left: 10%;
 font-family: Lato;
 font-size: 25px;
-margin-left: 40vh;
-margin-top:5vh;
+/* margin-left: 40vh;
+margin-top:20px;
+margin-bottom: 10px; */
 color: #272c33;
+width: 50%;
 `;
+
+const ButtonCont = styled.div`
+position: absolute;
+width: 23%;
+display: flex;
+justify-content: space-between;
+height: auto;
+left: 38%;
+top: 48%;
+margin: 40px;`
 
 const Button1 = styled.button`
 background-color: black;
@@ -35,66 +59,44 @@ background-color: black;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
-  padding: 16px 50px;
-  // position: relative;
-  margin-left: 20vh;
-  margin-top: 100px;
+  /* padding: 5px 50px; */
+  width: 200px;
+  height: 50px;
+  /* margin-left: 20vh;
+  margin-top: 100px; */
   text-decoration: none;
   user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
 `;
 
-const Button2 = styled.button`
-  background-color: transparent;
-  border: 1px solid #266DB6;
-  box-sizing: border-box;
-  color: #00132C;
-  font-family: "Avenir Next LT W01 Bold",sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-  padding: 16px 40px;
+const Button2 = styled(Button1)`
+  background-color: white;
   margin-left: 10px;
-  position: relative;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-
-
-.button-51:hover,
-.button-51:active {
-  outline: 0;
-}
-
-.button-51:hover {
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.button-51:before {
-  background-color: #D5EDF6;
-  content: "";
-  height: calc(100% + 3px);
-  position: absolute;
-  right: -7px;
-  top: -9px;
-  transition: background-color 300ms ease-in;
-  width: 100%;
-  z-index: -1;
+  color: black;
 `;
 
-
-const H3 = styled.div`
+const H3 = styled.a`
+font-family: Lato;
+font-size: 20px;
+text-decoration: none;
+/* margin-bottom: 70px;
+margin-left:30px; */
+width: fit-content;
 `;
 
 const Head = styled.div`
-display: flex-row;
-width: 100%;
+overflow: hidden;
+/* display: flex-row; */
+margin: 0;
+padding: 0;
+width: 100vw;
+max-width: 100%;
 height: 100vh;
+position: relative;
+bottom: 30px;
+
 background-image: url(${head});
-background-color: red;
+background-repeat: no-repeat;
+background-size: 100% ;
 `;
 
 const Logo = styled.div`
@@ -102,23 +104,26 @@ background-image: url(${logo});
 width: 70px;
 height: 70px;
 padding: 20px;
-margin-left:25vh;
+margin: 0 auto;
 `;
+
 const Spacer = styled.div`
 display:flex;
 flex-direction: column;
 justify-content: center;
-width: 100%;
+width: 100vw;
 height: 20vh;
-margin-left: 65vh;
-padding:10vh;
 `;
 
 const Text = styled.div`
 font-family: Lato;
 font-size: 20px;
 color: #272c33;
+width: 50%;
+margin: 0px auto;
+text-align: center;
 `;
+
 const Catagories = styled.div`
 display:flex;
 flex-direction: flex-row;
@@ -126,66 +131,76 @@ justify-content: space-around;
 `;
 
 const Boxes = styled.div`
-// display: flex;
-// flex-direction: column;
-// justify-content: flex-end;
-background-color:red;
-margin-top: 40vh;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: #b8a982;
+/* margin-top: 40vh;
 width: 35vh;
 height: 20vh;
 margin-left: 5vh;
-margin-bottom: 20px;
+margin-bottom: 20px; */
+height: 15%;
+width: 75%;
+/* margin: 0 auto; */
+position: absolute;
+bottom: 20px;
 
-
-
-background-color: white;
 `;
+
 const Bowls = styled.div`
 display: flex;
 flex-direction: column;
-justify-content: flex-end;
 margin:10px;
 background-image: url(${bowl});
 width: 300px;
 height: 400px;
+position: relative;
+align-items: center;
 `;
-const Plates = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: flex-end;
-margin:10px;
+
+const Plates = styled(Bowls)`
 background-image: url(${plate});
-width: 300px;
-height: 400px;
-`;
-const Cups = styled.div`
+position: relative;
 display: flex;
-flex-direction: column;
-justify-content: flex-end;
-margin:10px;
+align-items: center;
+`;
+
+const Cups = styled(Bowls)`
 background-image: url(${cup});
-width: 300px;
-height: 400px;
-`;
-const Vases = styled.div`
+position: relative;
 display: flex;
-flex-direction: column;
-justify-content: flex-end;
-margin:10px;
+align-items: center;
+`;
+
+const Vases = styled(Bowls)`
 background-image: url(${vase});
-width: 300px;
-height: 400px;
+position: relative;
+display: flex;
+align-items: center;
+`;
+
+const Footer = styled.div`
+width: 100%;
+height: 30vh;
+background-color: #16191f;
+
 `;
 
 
-function Home({user, setUser}) {
-  return(
+function Home() {
+  return (
     <Container>
       <Head>
-        <Title>Pottree</Title>
-        <H2>Home of unique, beautiful, handcrafted pottery</H2>
-        <Button1>Purchase</Button1>
-        <Button2>Learn More</Button2>
+        <Title>POTTREE</Title>
+
+        <H2>Buy and sell unique, beautiful, handcrafted pottery</H2>
+
+<ButtonCont>
+   <Link to="/productpage"><Button1 href="">Browse All</Button1></Link>
+        <Link to="/uploadproduct"><Button2>SELL</Button2></Link>
+</ButtonCont>
+       
       </Head>
       <Spacer>
         <Logo />
@@ -193,19 +208,27 @@ function Home({user, setUser}) {
       </Spacer>
       <Catagories>
         <Plates>
-        <Boxes />
+          <Boxes>
+            <H3>PLATES</H3>
+          </Boxes>
         </Plates>
         <Cups>
-          <Boxes />
+          <Boxes>
+            <H3>CUPS</H3>
+          </Boxes>
         </Cups>
         <Bowls>
-        <Boxes />
+          <Boxes>
+            <H3>BOWLS</H3>
+          </Boxes>
         </Bowls>
         <Vases>
-        <Boxes />
+          <Boxes>
+            <H3>VASES</H3>
+          </Boxes>
         </Vases>
       </Catagories>
-
+      <Footer />
     </Container>
   )
 }

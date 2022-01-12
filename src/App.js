@@ -33,7 +33,7 @@ useEffect(() => {
         <Route path="/basket" element={<Basket user={user} setUser={setUser}/>}></Route>
         <Route path="/login" element={<Login user={user} setUser={setUser}/>}></Route>
         <Route path="/uploadproduct" element={<UploadProduct user={user} setUser={setUser}/>}></Route>
-        <Route path="/productpage/:category" element={<ProductPage user={user} setUser={setUser}/>}></Route>
+        <Route path="/productpage/" element={<ProductPage user={user} setUser={setUser}/>}></Route>
         <Route path="/loginsuccess" element={<LoginSuccess user={user} setUser={setUser}/>}></Route>
         <Route path="/registersuccess" element={<RegisterSuccess user={user} setUser={setUser}/>}></Route>
         <Route path="/product/:id" element={<ProductDetails user={user} setUser={setUser}/>}></Route>

@@ -130,6 +130,7 @@ export const GetProductDetailsFetch = async (id, setProduct) => {
       method: "GET",
       headers: { "Authorization": `Bearer ${localStorage.getItem("myToken")}` }
     })
+    
     const data = await res.json()
     console.log(data);
     setProduct(data)

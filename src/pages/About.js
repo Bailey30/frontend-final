@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 
 const Container = styled.div`
 `
+
 function About() {
     return (
         <Container>

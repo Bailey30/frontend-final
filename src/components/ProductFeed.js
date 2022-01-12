@@ -6,7 +6,8 @@ import SortIcon from '@mui/icons-material/Sort';
 
 const Container = styled.div`
 width: 100%;
-font-family: 'Lato', sans-serif;
+/* font-family: 'Lato', sans-serif; */
+font-family: 'Open Sans', sans-serif;
 /* background-color: #F6F6F6; */
 
 `
@@ -91,29 +92,59 @@ function ProductFeed() {
     const [fetchedProductData, setFetchedProductData] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
     const [sort, setSort] = useState("")
-    const [filters, setFilters] = useState({})
+    const [filters, setFilters] = useState("All")
 
-    const handleFilters = (e)=> {
+    // const handleFilters = (e)=> {
+    //     const value = e.target.value
+    //     setFilters({
+    //         ...filters,
+    //         [e.target.name]: value ///name = prop
+    //     })
+    //     // console.log(filters)
+    // }
+
+    const handleFilters = (e) => {
         const value = e.target.value
-        setFilters({
-            ...filters,
-            [e.target.name]: value ///name = prop
-        })
-        console.log(e.target)
+        setFilters(
+            value ///name = prop
+        )
+
     }
 
     useEffect(() => {
-        filters && setFilteredProducts(
-          fetchedProductData.filter((item) =>
-            Object.entries(filters).every(([key, value]) =>
-              item[key].includes(value)
-            )
-          )
-        )
-      }, [fetchedProductData, filters])
+
+        console.log(filters)
+    }, [filters])
+
+    useEffect(() => {
+
+        // console.log(Object.values(filters))
+        // setFilteredProducts(fetchedProductData.filter((item) =>
+        //     Object.entries(filters).every(([key, value]) =>
+        //       item.categories.includes(value)
+        //     )
+        //   )
+        // )
+        // console.log(Object.values(filters))
+
+        filters === "All" ? setFilteredProducts(fetchedProductData)
+            : setFilteredProducts(fetchedProductData.filter((item) =>
+                item.categories.includes(filters)))
+
+
+                if (sort === "asc") {
+                    setFilteredProducts(prev => [...prev].sort((a, b) => a.price - b.price))
+                } else if (sort === "desc") {
+                    setFilteredProducts(prev => [...prev].sort((a, b) => b.price - a.price))
+                } else
+                    return
+     
+
+    }, [fetchedProductData, sort, filters])
 
     const fetchProducts = () => {
         getProductFetch(setFetchedProductData)
+        // setFilteredProducts(fetchedProductData)
         console.log("test");
     }
     useEffect(() => {
@@ -128,64 +159,71 @@ function ProductFeed() {
     // }, [fetchedProductData])
 
     console.log(filteredProducts);
-    useEffect(() => {
-        const data = fetchedProductData
-        if (sort === "asc") {
-            setFilteredProducts(prev => [...prev].sort((a, b) => a.price - b.price))
-        } else if (sort === "desc") {
-            setFilteredProducts(data.sort((a, b) => b.price - a.price))
-        } else
-            console.log(filteredProducts);
-    }, [sort])
+    // useEffect(() => {
+
+    //     if (sort === "asc") {
+    //         setFilteredProducts(prev => [...prev].sort((a, b) => a.price - b.price))
+    //     } else if (sort === "desc") {
+    //         setFilteredProducts(prev => [...prev].sort((a, b) => b.price - a.price))
+    //     } else
+    //         setFilteredProducts(fetchedProductData)
+    // }, [sort])
 
 
 
     return (
         <Container>
             <SectionCont>
-            <FilterBar>
-                <CategoryName>All Products</CategoryName>
-                <FilterContainer>
-                    <Icon><SortIcon /></Icon>
-                    <CategoryCont>
-                        <Category>Category:</Category>
-                        <Select name="category" onChange={(e) => handleFilters(e.target.value)}>
-                            {/* <Option value="newest">Newest</Option> */}
-                            <Option >Cups</Option>
-                            <Option>Vases</Option>
-                            <Option>Ceramic</Option>
-                            <Option>Bowls</Option>
-                            <Option>Plates</Option>
-                            <Option>Sculpture</Option>
-                            <Option>Other</Option>
-                        </Select>
-                    </CategoryCont>
-                    <PriceCont>
-                        <Price>Price:</Price>
-                        <Select onChange={(e) => setSort(e.target.value)}>
-                            {/* <Option value="newest">Newest</Option> */}
-                            <Option value="asc">Lowest first</Option>
-                            <Option value="desc">Highest first</Option>
-                        </Select>
-                    </PriceCont>
-                </FilterContainer>
-            </FilterBar>
+                <FilterBar>
+                    <CategoryName>All Products</CategoryName>
+                    <FilterContainer>
+                        <Icon><SortIcon /></Icon>
+                        <CategoryCont>
+                            <Category>Category:</Category>
+                            <Select name="category" onChange={handleFilters}>
+                                {/* <Option value="newest">Newest</Option> */}
+                                <Option >All</Option>
+                                <Option >Mug</Option>
+                                <Option>Vase</Option>
+                                <Option>Ceramic</Option>
+                                <Option>Bowl</Option>
+                                <Option>Plate</Option>
+                                <Option>Sculpture</Option>
+                                <Option>Other</Option>
+                            </Select>
+                        </CategoryCont>
+                        <PriceCont>
+                            <Price>Price:</Price>
+                            <Select onChange={(e) => setSort(e.target.value)}>
+                                {/* <Option value="newest">Newest</Option> */}
 
-            <ProductList>
-                {sort ?
-                    filteredProducts.map((item, index) => {
-                        return <Product item={item} index={index} />
-                    })
-                    :
-                    fetchedProductData.map((item, index) => {
-                        return <Product item={item} index={index} />
-                    })
-                }
+                                <Option value="all">All</Option>
+                                <Option value="asc">Lowest first</Option>
+                                <Option value="desc">Highest first</Option>
+                            </Select>
+                        </PriceCont>
+                    </FilterContainer>
+                </FilterBar>
 
-            </ProductList>
-</SectionCont>
+                <ProductList>
+        {/* {filteredProducts && filteredProducts.map((item, index)=> {
+            return <Product item={item} idex={index}/>
+        })} */} 
 
-    
+                    {sort || filters  ?
+                        filteredProducts.map((item, index) => {
+                            return <Product item={item} index={index} />
+                        })
+                        :
+                        fetchedProductData.map((item, index) => {
+                            return <Product item={item} index={index} />
+                        })
+                    }
+
+                </ProductList>
+            </SectionCont>
+
+
         </Container>
     )
 }

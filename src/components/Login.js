@@ -78,7 +78,7 @@ outline: none;
 transition: all 0.3s ease;
 position: relative;
 &::placeholder {
-    color: lightgray;
+    color: lightslategray;
 }
 
 `
@@ -144,6 +144,7 @@ color: gray;`
 
 
 function Login({ user, setUser }) {
+    const [agree, setAgree] = useState(false)
     const navigate = useNavigate()
     const [login, setLogin] = useState(true)
     // const [user, setUser] = useState({
@@ -156,6 +157,8 @@ function Login({ user, setUser }) {
     const [username, setUsername] = useState()
     const [loggedIn, setLoggedIn] = useState()
     const [errorMessage, setErrorMessage] = useState()
+    const [displayAgreeWarning, setDisplayAgreeWarning] = useState(false)
+    
 
     const LoginTrueFalse = (e) => {
         e.preventDefault()
@@ -163,21 +166,27 @@ function Login({ user, setUser }) {
     }
 
     const handler = async (e) => {
-        e.preventDefault();
-        console.log(`login: ${login}`);
-        try {
-            if (!login) {
-                signUpFetch(username, email, password, setUser, setLoggedIn, setErrorMessage);
-            } else {
-                loginFetch(email, password, setUser, setLoggedIn, setErrorMessage);
-            }
-        } catch (error) { }
+        if ((!login & agree) || login) {
+            e.preventDefault();
+            console.log(`login: ${login}`);
+            try {
+                if (!login) {
+                    signUpFetch(username, email, password, setUser, setLoggedIn, setErrorMessage);
+                } else {
+                    loginFetch(email, password, setUser, setLoggedIn, setErrorMessage);
+                }
+            } catch (error) { }
+        } else {
+            e.preventDefault();
+            setDisplayAgreeWarning(true)
+        }
+
     };
 
     useEffect(() => {
-      if(loggedIn) {
-          navigate("/")
-      }
+        if (loggedIn) {
+            navigate("/")
+        }
     }, [loggedIn])
 
 
@@ -203,7 +212,9 @@ function Login({ user, setUser }) {
 
 
 
-
+    const AgreeHandler = () => {
+        setAgree(!agree)
+    }
 
     return (
         <Container>
@@ -223,10 +234,11 @@ function Login({ user, setUser }) {
                             <Error>Incorrect password</Error> : null}
                         {login ? null :
                             <AgreementCont>
-                                <Checkbox type="checkbox"></Checkbox>
+                                <Checkbox type="checkbox" onChange={AgreeHandler}></Checkbox>
                                 <Agreement> I agree to the terms and privacy policy</Agreement>
                             </AgreementCont>
                         }
+                        {displayAgreeWarning ? <Error style={{margin: "0 auto"}}>Please agree to the terms and privacy policy</Error> : null}
                         <ButtonCont>
                             <Button onClick={handler} color="99A9B9" text="white">{login ? "SIGN IN" : "SIGN UP"}</Button>
                             {/* <Button border="99A9B9" text="black">Sign In</Button> */}

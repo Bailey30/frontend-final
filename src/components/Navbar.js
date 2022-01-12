@@ -74,9 +74,9 @@ function Navbar({ user, setUser }) {
                 <Link to='/basket'>
                     <NavButton>BASKET</NavButton>
                 </Link>
-                {!user ? <Link to="/login"><NavButton>LOGIN</NavButton></Link> : <NavButton
+                {!user ? <Link to="/login"><NavButton>LOGIN</NavButton></Link> : <Link to=""><NavButton
                     onClick={() => logOut()}
-                >LOG OUT</NavButton>}
+                >LOG OUT</NavButton></Link>}
 
         
             </Buttons>

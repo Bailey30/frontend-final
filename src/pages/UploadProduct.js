@@ -6,7 +6,11 @@ import { UploadProductFetch } from "../requestMethods"
 
 const Container = styled.div`
 position: relative;
-overflow: hidden;`
+overflow: hidden;
+font-family: 'Open Sans', sans-serif;
+height: 100vh;
+
+`
 
 const Line = styled.div`
 width: 93vw;
@@ -24,37 +28,62 @@ border-bottom: 1px solid lightgray;`
 
 
 const Heading = styled.h1`
-margin: 0 10px;;`
+margin: 0 10px;
+/* font-style: italic; */
+font-weight: 300;
+letter-spacing: 2px;
+text-align: center;
+`
 
 const Input = styled.input`
-padding: 10px;
+padding: 10px 20px;
 border: 2px solid lightgray;
-border-radius: 5px;`
+border-radius: 5px;
+position: relative;`
+
+const PlaceHolder = styled.p`
+position: absolute;
+top: 50%;
+left: 27px;
+transform: translate(-50%, -30%);
+color: gray;`
 
 const Button = styled.button`
 margin: 10px 10px;
 padding: 10px;
 width: 10vw;
 background-color: ${props => props.background};
-border: 2px solid black;
+border: ${props => props.border ? "none" : "2px solid black"};
 color: ${props => props.color};
 position: relative;
-cursor: pointer;`
+cursor: pointer;
+height: ${props => props.size === "larger" && "50px"};
+width: ${props => props.size === "larger" && "100%"};
+
+`
 
 const Image = styled.img``
 
 const UploadComponent = styled.div`
 width: 50vw;
-margin: 2vh auto;
-background: white;
-padding: 10px 20px;
-`
+margin: 0vh auto;
+/* background: white; */
+padding: 20px 20px;
+width: 50vw;
+/* box-shadow: -10px 40px 40px 5px rgba(0,0,0,0.1); */
+margin: 0 auto;
+display: flex;
+flex-direction: column;
+align-items: center;`
 
 const Form = styled.form`
 border: 1px solid gray;`
 
 const Label = styled.label`
 margin: 10px 0;`
+
+const ImageAndChoices = styled.div`
+display: flex;`
 
 const PreviewImage = styled.img`
 margin: 10px 0;
@@ -65,17 +94,29 @@ background-color: lightgray;`
 
 const BoxChoices = styled.div`
 display: flex;
+/* flex-direction: column; */
+flex-wrap: wrap;
 margin: 10px 0;
+justify-content: space-between;
 `
 
-const Test = styled.input.attrs({ type: "checkbox" })`
+const Test = styled.input.attrs({ type: "checkbox" })`;
 `
-const BoxLabel = styled.div``
+const BoxLabel = styled.div`
+margin-left:5px;`
 
 const Cont = styled.div`
+position: relative;
 display: flex;
 flex-direction:column;
-padding: 10px;
+padding: 15px;
+margin: 10px;
+background: white;
+/* border: 1px solid gray; */
+/* box-shadow: -10px 10px 40px 5px rgba(0,0,0,0.1); */
+z-index: 10;
+position: relative;
+width: 100%;
 `
 const ImageCont = styled.div`
 display: flex;
@@ -103,9 +144,19 @@ position: relative;`
 const CatCont = styled.div`
 display: flex;
 align-items: center;
-margin-right: 10px;`
+margin: 5px;
+letter-spacing: 1px;
+width: 100px;`
 
-
+const PleaseSignUp = styled.div`
+margin: 50px auto;
+text-align: center;
+width: 50vw;
+height: 50px;`
+const Message = styled.div`
+font-size: 25px;
+font-weight: 300;
+height: 50px;`
 
 function UploadProduct({ user, setUser }) {
     const [imageSelected, setImageSelected] = useState("")
@@ -231,69 +282,68 @@ function UploadProduct({ user, setUser }) {
 
             <Navbar user={user} setUser={setUser} />
             <Line></Line>
+            {!user ? <PleaseSignUp>
+                <Message>YOU NEED AN ACCOUNT TO BE ABLE TO SELL  
+                <br/>PLEASE SIGN UP TO CONTINUE</Message>
+            </PleaseSignUp> :
+
+                <UploadComponent >
+            <Heading>UPLOAD A PRODUCT</Heading>
+            <Cont>
+                <Label for="name">NAME</Label>
+                <Input type="text" id="name" onChange={(e) => setProductData({ ...productData, title: e.target.value })}></Input>
+            </Cont>
+
+            <ImageAndChoices>
+                <Cont >
+
+                    <Label>IMAGE</Label>
+                    <ImageCont>
+                        {/* <PreviewImage src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${previewImage}.jpg`}></PreviewImage> */}
+                        <PreviewImage src={previewImage}></PreviewImage>
+                        <ImageButtonCont>
+                            <Button
+                                // onClick={uploadImage} 
+                                background="white" color="black">
+                                <AddImage>ADD IMAGE</AddImage><ImageInput type="file" onChange={(e) => imageHandler(e)}></ImageInput>
+                            </Button>
+                        </ImageButtonCont>
+                    </ImageCont>
+                    {/* <Image src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${publicId}.jpg`}></Image> */}
+                    {/* <Image src="http://res.cloudinary.com/dthuzb3gx/image/upload/v1641546000/srzyakrwrpcwrt0ylwfu.jpg"></Image> */}
+
+                </Cont>
+                <Cont>
+                    <Label>CATEGORIES</Label>
+                    <BoxChoices>
+                        {categories.map((cat, index) => {
+                            return <CatCont key={index}>
+                                <Test id={cat} name={cat} value={cat} type="checkbox"
+                                    checked={checkedState[index]}
+                                    onChange={() => handleChange(index)}
+                                />
+                                <BoxLabel>{cat}</BoxLabel>
+                            </CatCont>
+                        })}
+                    </BoxChoices>
+                </Cont>
+            </ImageAndChoices>
+            <Cont>
+                <Label for="desc">DESCRIPTION</Label>
+                <Input type="text" id="desc" onChange={(e) => setProductData({ ...productData, desc: e.target.value })}></Input>
+            </Cont>
+            <Cont>
+                <Label for="desc">PRICE</Label>
+                <Input type="text" id="price" onChange={(e) => setProductData({ ...productData, price: e.target.value })}></Input><PlaceHolder>£</PlaceHolder>
+            </Cont>
+
+            <Button onClick={UploadData} background="black" color="white" size="larger" border="none">POST AD</Button>
+
+
+        </UploadComponent>
             
-            {/* <Mask></Mask> */}
-                <UploadComponent>
-                    <Heading>Upload a product to sell</Heading>
-                    <Cont>
-                        <Label for="name">Name</Label>
-                        <Input type="text" id="name" onChange={(e) => setProductData({ ...productData, title: e.target.value })}></Input>
-                    </Cont>
-
-
-                    <Cont >
-
-                        <Label>Image</Label>
-                        <ImageCont>
-
-                            {/* <PreviewImage src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${previewImage}.jpg`}></PreviewImage> */}
-                            <PreviewImage src={previewImage}></PreviewImage>
-
-                            <ImageButtonCont>
-
-                                <Button
-                                    // onClick={uploadImage} 
-                                    background="white" color="black">
-                                    <AddImage>ADD IMAGE</AddImage><ImageInput type="file" onChange={(e) => imageHandler(e)}></ImageInput>
-                                </Button>
-                            </ImageButtonCont>
-                        </ImageCont>
-                        {/* <Image src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${publicId}.jpg`}></Image> */}
-                        {/* <Image src="http://res.cloudinary.com/dthuzb3gx/image/upload/v1641546000/srzyakrwrpcwrt0ylwfu.jpg"></Image> */}
-
-                    </Cont>
-                    <Cont>
-                        <Label>Categories</Label>
-                        <BoxChoices>
-                            {categories.map((cat, index) => {
-                                return <CatCont key={index}>
-                                    <Test id={cat} name={cat} value={cat} type="checkbox"
-                                        checked={checkedState[index]}
-                                        onChange={() => handleChange(index)}
-                                    />
-                                    <BoxLabel>{cat}</BoxLabel>
-                                </CatCont>
-                            })}
-                        </BoxChoices>
-
-                    </Cont>
-
-                    <Cont>
-                        <Label for="desc">Description</Label>
-                        <Input type="text" id="desc" onChange={(e) => setProductData({ ...productData, desc: e.target.value })}></Input>
-                    </Cont>
-                    <Cont>
-                        <Label for="desc">Price</Label>
-                        <Input type="text" id="price" onChange={(e) => setProductData({ ...productData, price: e.target.value })}></Input>
-                    </Cont>
-
-                    <Button onClick={UploadData} background="black" color="white">POST AD</Button>
-
-
-                </UploadComponent>
-            
-
-        </Container>
+}
+        </Container >
     )
 }
 
