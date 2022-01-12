@@ -19,7 +19,6 @@ export const loginFetch = async (email, password, setUser, setLoggedIn, setError
   try {
     const response = await fetch(`${process.env.REACT_APP_REST_API}users/login`, {
       method: "POST",
-      mode: "no-cors",
       headers: {
         "Content-Type": "application/json"
       },
