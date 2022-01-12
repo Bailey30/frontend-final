@@ -19,7 +19,10 @@ export const loginFetch = async (email, password, setUser, setLoggedIn, setError
   try {
     const response = await fetch(`${process.env.REACT_APP_REST_API}users/login/`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         email,
         password,
@@ -155,7 +158,7 @@ export const GetBasketFetch = async (user, setBasket) => {
 
     })
     const data = await res.json()
-    console.log( data);
+    console.log(data);
     setBasket(data)
   }
   catch (error) {
