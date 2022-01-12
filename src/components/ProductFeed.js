@@ -108,11 +108,9 @@ function ProductFeed() {
         setFilters(
             value ///name = prop
         )
-
     }
 
     useEffect(() => {
-
         console.log(filters)
     }, [filters])
 

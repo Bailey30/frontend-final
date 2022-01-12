@@ -4,7 +4,7 @@ import { TokenFetch } from "./requestMethods";
 import './App.css';
 import Home from "./pages/Home"
 import Login from "./pages/Login"
-import Basket from "./pages/Basket"
+import Basket from "./pages/BasketPage"
 import UploadProduct from "./pages/UploadProduct";
 import ProductPage from "./pages/ProductPage";
 import LoginSuccess from "./pages/LoginSuccess";
