@@ -178,7 +178,7 @@ height: 400px;
 `;
 
 
-function Home() {
+function Home({user, setUser}) {
   return(
     <Container>
       <Head>
