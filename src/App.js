@@ -14,13 +14,14 @@ import FavoritesPage from "./pages/FavoritesPage";
 import About from "./pages/About";
 
 
-
 function App() {
   const [user, setUser] = useState({
     username: "",
     userId: "",
     email: ""
 })
+
+const [prices, setPrices] = useState([])
 
 useEffect(() => {
   TokenFetch(setUser, user)
@@ -30,25 +31,17 @@ useEffect(() => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home/>}></Route>
-        <Route path="/basket" element={<ProductDetails/>}></Route>
-        <Route path="/login" element={<Login/>}></Route>
-        <Route path="/uploadimage" element={<UploadImageTest/>}></Route>
-        <Route path="/favorites" element={<FavoritesPage/>}></Route>
-
-        <Route path="/productpage" element={<ProductPage/>}></Route>
-        <Route path="/loginsuccess" element={<LoginSuccess/>}></Route>
-        <Route path="/registersuccess" element={<RegisterSuccess/>}></Route>
         <Route path="/" element={<Home user={user} setUser={setUser}/>}></Route>
         <Route path="/basket" element={<Basket user={user} setUser={setUser}/>}></Route>
         <Route path="/login" element={<Login user={user} setUser={setUser}/>}></Route>
         <Route path="/uploadproduct" element={<UploadProduct user={user} setUser={setUser}/>}></Route>
-        <Route path="/productpage/:category" element={<ProductPage user={user} setUser={setUser}/>}></Route>
+        <Route path="/productpage/" element={<ProductPage user={user} setUser={setUser}/>}></Route>
         <Route path="/loginsuccess" element={<LoginSuccess user={user} setUser={setUser}/>}></Route>
         <Route path="/registersuccess" element={<RegisterSuccess user={user} setUser={setUser}/>}></Route>
         <Route path="/product/:id" element={<ProductDetails user={user} setUser={setUser}/>}></Route>
+        <Route path="/favorites" element={<FavoritesPage prices={prices} setPrices={setPrices} user={user} setUser={setUser}/>}></Route>
         {/* <Route path="/basket" element={<Basket/>}></Route> */}
-
+    
 
         <Route path="/about" element={<About/>}></Route>
   
