@@ -1,14 +1,17 @@
 import React, {useEffect, useState} from "react"
 import styled from "styled-components" 
-import head from "../images/newhead.jpg"
+import head from "../images/newheader.avif"
 import logo from "../images/lglogo.png"
 import cup from "../images/cups.jpg"
 import plate from "../images/plates.jpg"
 import bowl from "../images/bowls.jpg"
 import vase from "../images/vases.jpg"
+import {Link } from "react-router-dom"
 
 
-const Container = styled.div``;
+const Container = styled.div`
+width: 100vw;
+`;
 
 const Title = styled.div`
 font-family: Lato;
@@ -36,65 +39,34 @@ background-color: black;
   font-weight: 700;
   line-height: 24px;
   padding: 16px 50px;
-  // position: relative;
   margin-left: 20vh;
   margin-top: 100px;
   text-decoration: none;
   user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
 `;
 
-const Button2 = styled.button`
-  background-color: transparent;
-  border: 1px solid #266DB6;
-  box-sizing: border-box;
-  color: #00132C;
-  font-family: "Avenir Next LT W01 Bold",sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-  padding: 16px 40px;
+const Button2 = styled(Button1)`
+  background-color: white;
   margin-left: 10px;
-  position: relative;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-
-
-.button-51:hover,
-.button-51:active {
-  outline: 0;
-}
-
-.button-51:hover {
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.button-51:before {
-  background-color: #D5EDF6;
-  content: "";
-  height: calc(100% + 3px);
-  position: absolute;
-  right: -7px;
-  top: -9px;
-  transition: background-color 300ms ease-in;
-  width: 100%;
-  z-index: -1;
+  color: black;
 `;
 
-
-const H3 = styled.div`
+const H3 = styled.a`
+font-family: Lato;
+font-size: 20px;
+text-decoration: none;
+margin-bottom: 70px;
+margin-left:30px;
 `;
 
 const Head = styled.div`
 display: flex-row;
-width: 100%;
+width: 100vw;
 height: 100vh;
+position: relative;
+bottom: 30px;
+
 background-image: url(${head});
-background-color: red;
 `;
 
 const Logo = styled.div`
@@ -102,16 +74,15 @@ background-image: url(${logo});
 width: 70px;
 height: 70px;
 padding: 20px;
-margin-left:25vh;
+margin-left:25vw;
 `;
+
 const Spacer = styled.div`
 display:flex;
 flex-direction: column;
 justify-content: center;
-width: 100%;
+width: 100vw;
 height: 20vh;
-margin-left: 65vh;
-padding:10vh;
 `;
 
 const Text = styled.div`
@@ -119,6 +90,7 @@ font-family: Lato;
 font-size: 20px;
 color: #272c33;
 `;
+
 const Catagories = styled.div`
 display:flex;
 flex-direction: flex-row;
@@ -126,20 +98,17 @@ justify-content: space-around;
 `;
 
 const Boxes = styled.div`
-// display: flex;
-// flex-direction: column;
-// justify-content: flex-end;
-background-color:red;
+display: flex;
+justify-content: flex-start;
+align-items: flex-end;
+background-color: #b8a982;
 margin-top: 40vh;
 width: 35vh;
 height: 20vh;
 margin-left: 5vh;
 margin-bottom: 20px;
-
-
-
-background-color: white;
 `;
+
 const Bowls = styled.div`
 display: flex;
 flex-direction: column;
@@ -149,32 +118,24 @@ background-image: url(${bowl});
 width: 300px;
 height: 400px;
 `;
-const Plates = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: flex-end;
-margin:10px;
+
+const Plates = styled(Bowls)`
 background-image: url(${plate});
-width: 300px;
-height: 400px;
 `;
-const Cups = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: flex-end;
-margin:10px;
+
+const Cups = styled(Bowls)`
 background-image: url(${cup});
-width: 300px;
-height: 400px;
 `;
-const Vases = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: flex-end;
-margin:10px;
+
+const Vases = styled(Bowls)`
 background-image: url(${vase});
-width: 300px;
-height: 400px;
+`;
+
+const Footer = styled.div`
+width: 100%;
+height: 30vh;
+background-color: #16191f;
+
 `;
 
 
@@ -183,9 +144,10 @@ function Home({user, setUser}) {
     <Container>
       <Head>
         <Title>Pottree</Title>
+        <Link to ="About">button</Link>
         <H2>Home of unique, beautiful, handcrafted pottery</H2>
-        <Button1>Purchase</Button1>
-        <Button2>Learn More</Button2>
+        <Button1 href="">Browse All</Button1>
+        <Button2 as="a" href="Basket.js">About Us</Button2>
       </Head>
       <Spacer>
         <Logo />
@@ -193,20 +155,28 @@ function Home({user, setUser}) {
       </Spacer>
       <Catagories>
         <Plates>
-        <Boxes />
+        <Boxes>
+        <H3>PLATES</H3>
+        </Boxes>
         </Plates>
         <Cups>
-          <Boxes />
+          <Boxes>
+            <H3>CUPS</H3>
+          </Boxes>
         </Cups>
         <Bowls>
-        <Boxes />
+        <Boxes>
+          <H3>BOWLS</H3>
+        </Boxes>
         </Bowls>
         <Vases>
-        <Boxes />
+        <Boxes>
+          <H3>VASES</H3>  
+        </Boxes>
         </Vases>
       </Catagories>
-
-    </Container>
+      <Footer />
+  </Container>
   )
 }
 export default Home
