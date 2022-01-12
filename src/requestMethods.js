@@ -17,7 +17,7 @@ export const TokenFetch = async (setUser) => {
 
 export const loginFetch = async (email, password, setUser, setLoggedIn, setErrorMessage) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_REST_API}users/login/`, {
+    const response = await fetch(`${process.env.REACT_APP_REST_API}users/login`, {
       method: "POST",
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -83,7 +83,7 @@ export const signUpFetch = async (username, email, password, setUser, setLoggedI
 
 export const getProductFetch = async (setFetchedProductInfo) => {
   try {
-    const res = await fetch(`${process.env.REACT_APP_REST_API}products/`, {
+    const res = await fetch(`${process.env.REACT_APP_REST_API}products`, {
       method: "GET",
       headers: { "Authorization": `Bearer ${localStorage.getItem("myToken")}` }
     })
@@ -129,7 +129,7 @@ export const UploadProductFetch = async (productData) => {
 ////product details fetch
 export const GetProductDetailsFetch = async (id, setProduct) => {
   try {
-    const res = await fetch(`${process.env.REACT_APP_REST_API}products/find/` + id, {
+    const res = await fetch(`${process.env.REACT_APP_REST_API}products/find/${id}`, {
       method: "GET",
       headers: { "Authorization": `Bearer ${localStorage.getItem("myToken")}` }
     })

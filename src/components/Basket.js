@@ -30,15 +30,31 @@ height: 400px;`
 
 const Subtotal = styled.div`
 display: flex;
-justify-content: space-between;`
+justify-content: space-between;
+margin: 10px;
+`
 
-const Shipping = styled.div``
+const Shipping = styled.div`
+display: flex;
+justify-content: space-between;
+margin: 10px;
+`
 
-const Total = styled.div``
+const Total = styled.div`
+display: flex;
+justify-content: space-between;
+margin: 10px;
+`
 
-const Text = styled.span``
+const Text = styled.span`
+width: fit-content;
+margin: 0 10px;
+`
 
-const Amount = styled.span``
+const Amount = styled.span`
+width: fit-content;
+margin: 0 10px;
+`
 
 function Basket({ user }) {
   const [basket, setBasket] = useState([])
@@ -53,24 +69,24 @@ function Basket({ user }) {
 
   return (
     <Container>
-     
 
-<Wrapper>
-                <LeftCont>
-                     {basket ? basket.map((item, index) => {
-      //  return console.log(test);
-        return <BasketItem item={item} index={index} />
-      }) :
-        null}
-                </LeftCont>
-                <RightCont>
-                    <Totals>
-                        <Subtotal><Text>Subtotal</Text>100<Amount></Amount></Subtotal>
-                        <Shipping><Text>Shipping</Text>10<Amount></Amount></Shipping>
-                        <Total><Text>Total</Text><Amount>110</Amount></Total>
-                    </Totals>
-                </RightCont>
-</Wrapper>
+
+      <Wrapper>
+        <LeftCont>
+          {basket ? basket.map((item, index) => {
+            //  return console.log(test);
+            return <BasketItem item={item} index={index} />
+          }) :
+            null}
+        </LeftCont>
+        <RightCont>
+          <Totals>
+            <Subtotal><Text>Subtotal</Text><Amount>100</Amount></Subtotal>
+            <Shipping><Text>Shipping</Text><Amount>10</Amount></Shipping>
+            <Total><Text>Total</Text><Amount>110</Amount></Total>
+          </Totals>
+        </RightCont>
+      </Wrapper>
 
     </Container>
   )
