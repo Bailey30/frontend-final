@@ -15,8 +15,13 @@ width: 100%;
 font-family: 'Open Sans', sans-serif;
 `
 
+const Heading = styled.h1`
+width: fit-content;
+margin-left: 95px;
+font-weight: 100;`
+
 const Wrapper = styled.div`
-margin-top: 100px;;
+margin-top: 10px;;
 display: flex;
 justify-content: space-evenly;`
 const LeftCont = styled.div`
@@ -106,7 +111,7 @@ function Basket({ user, prices, setPrices }) {
   return (
     <Container>
 
-
+    <Heading>YOUR BASKET</Heading>
       <Wrapper>
         <LeftCont>
           {basket ? basket.map((item, index) => {

@@ -61,12 +61,13 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-function Navbar({ user, setUser, prices }) {
+function Navbar({ user, setUser, prices, setPrices }) {
 
     const logOut = () => {
         localStorage.removeItem("myToken")
         setUser("")
         console.log(user);
+        // setPrices(0)
         // setLoggedIn(false)
     } 
     const [basketNum, setBasketNum] = useState()

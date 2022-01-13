@@ -177,7 +177,7 @@ font-size: 25px;
 font-weight: 300;
 height: 50px;`
 
-function UploadProduct({ user, setUser}) {
+function UploadProduct({ user, setUser, setPrices, prices}) {
     const [imageSelected, setImageSelected] = useState("")
     const [productData, setProductData] = useState({
         username: "",
@@ -293,7 +293,7 @@ function UploadProduct({ user, setUser}) {
     return (
         <Container>
 
-            <Navbar user={user} setUser={setUser} />
+            <Navbar user={user} setUser={setUser} prices={prices} setPrices={setPrices}/>
             <Line></Line>
             {!user ? <PleaseSignUp>
                 <Message>YOU NEED AN ACCOUNT TO BE ABLE TO SELL

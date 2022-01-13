@@ -139,7 +139,7 @@ const ButtonFavorites = styled.button`
 `;
 
 
-function ProductDetails({prices, setPrices, user}) {
+function ProductDetails({prices, setPrices, user, setUser}) {
     const location = useLocation()
     const id = location.pathname.split("/")[2]
     const [product, setProduct] = useState({})
@@ -163,7 +163,7 @@ useEffect(() => {
 }, [product])
     return (
         <PageContainer>
-            <Navbar />
+            <Navbar prices={prices} setPrices={setPrices} user={user} setUser={setUser}/>
         <Line></Line>
             {/* <Div> */}
             <DetailsContainer>

@@ -26,7 +26,7 @@ function ProductPage({user, setUser, prices, setPrices}) {
 
   return (
     <Container>
-      <Navbar style={{"z-index": 100}} user={user} setUser={setUser}/>
+      <Navbar style={{"z-index": 100}} user={user} setUser={setUser} prices={prices} setPrices={setPrices}/>
       <ProductFeed user={user} prices={prices} setPrices={setPrices} params={params} filters={filters} setFilters={setFilters}/>
     </Container>
   )

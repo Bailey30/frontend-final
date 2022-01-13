@@ -260,12 +260,13 @@ background-color: #16191f;
 `;
 
 
-function Home({ user, setUser }) {
+function Home({ user, setUser, setPrices, prices }) {
 
   const logOut = () => {
     localStorage.removeItem("myToken")
     setUser("")
     console.log(user);
+    setPrices(0)
     // setLoggedIn(false)
   }
   return (

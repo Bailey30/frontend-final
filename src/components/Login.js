@@ -229,7 +229,7 @@ function Login({ user, setUser }) {
                             : (errorMessage === "Incorrect email" & login) ?
                                 <Error>Incorrect email</Error> : null}
 
-                        <InputCont><Input onChange={(e) => setPassword(e.target.value)} placeholder="password" ></Input></InputCont>
+                        <InputCont><Input onChange={(e) => setPassword(e.target.value)} placeholder="password" type="password"></Input></InputCont>
                         {(errorMessage === "Incorrect password" & login) ?
                             <Error>Incorrect password</Error> : null}
                         {login ? null :

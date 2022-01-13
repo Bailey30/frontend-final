@@ -51,7 +51,7 @@ export const loginFetch = async (email, password, setUser, setLoggedIn, setError
 
 export const signUpFetch = async (username, email, password, setUser, setLoggedIn, setErrorMessage) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_REST_API}/users/register`, {
+    const response = await fetch(`${process.env.REACT_APP_REST_API}users/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
