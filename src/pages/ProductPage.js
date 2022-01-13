@@ -23,11 +23,6 @@ function ProductPage({user, setUser, prices, setPrices}) {
   // console.log(location.pathname) 
   // console.log(this.match.params)
     
-  
-
-
-
-
 
   return (
     <Container>

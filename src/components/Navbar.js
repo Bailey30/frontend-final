@@ -88,9 +88,7 @@ function Navbar({ user, setUser, prices }) {
                 <Link to='/uploadproduct'>
                     <NavButton>SELL</NavButton>
                 </Link>
-                <Link to='/about' style={{ 'min-width': 'fit-content' }}>
-                    <NavButton>ABOUT US</NavButton>
-                </Link>
+                
                 <Link to='/basket'>
                     <NavButton>
                         BASKET

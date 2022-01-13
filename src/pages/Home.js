@@ -155,18 +155,32 @@ background-size: 100% ;
 
 const Logo = styled.div`
 background-image: url(${logo});
-width: 70px;
+width: 60px;
 height: 70px;
 padding: 20px;
 margin: 0 auto;
+object-fit: cover;
+background-repeat: no-repeat;
 `;
+
+const About = styled.div`
+width: 100vw;
+height: 200px;`
+
+const AboutText = styled.p`
+text-align: center;
+margin: 140px auto;
+width: 80vw;
+font-size: 24px;
+font-weight: 200;
+line-height: 2;`
 
 const Spacer = styled.div`
 display:flex;
 flex-direction: column;
 justify-content: center;
 width: 100vw;
-height: 20vh;
+height: 30vh;
 `;
 
 const Text = styled.div`
@@ -174,7 +188,8 @@ font-family: Lato;
 font-size: 20px;
 color: #272c33;
 width: 50%;
-margin: 0px auto;
+margin: 10px auto 20px;
+padding: 20px;
 text-align: center;
 `;
 
@@ -265,9 +280,7 @@ function Home({ user, setUser }) {
             <Link to='/uploadproduct'>
               <NavButton>SELL</NavButton>
             </Link>
-            <Link to='/about' style={{ 'min-width': 'fit-content' }}>
-              <NavButton>ABOUT US</NavButton>
-            </Link>
+            
             <Link to='/basket'>
               <NavButton>
                 BASKET
@@ -292,6 +305,15 @@ function Home({ user, setUser }) {
         </ButtonCont>
 
       </Head>
+    <About>
+    <AboutText>
+    Welcome to Pottree, home of unique, handcrafted pottery.
+                    Pottree was established to showcase the one of a kind and the beautiful. We bring together the best hand thrown and fired pottery that Britain has to offer.  As a buyer, you can be assured that nothing you buy is mass produced and that your purchase is supporting artists at work.
+                    {/* Our pottery is made by professional and amateur artists or artisans working alone or in small groups, making unique items or short runs.  */}
+                    {/* Typically, all stages of manufacture are carried out by the artists themselves.[1] Our selection of pottery includes functional wares such as tableware and non-functional wares such as vases and bowls used only for display. Pottree potters can be referred to as ceramic artists, ceramists, ceramicists, or as an artist who uses clay as a medium. */}
+    </AboutText>
+
+    </About>
       <Spacer>
         <Logo />
         <Text>Browse by catagory or follow the links above</Text>

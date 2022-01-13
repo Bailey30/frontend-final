@@ -90,7 +90,7 @@ display: flex;`
 const PreviewImage = styled.img`
 width: 140%;
 height:auto;
-border: 1px solid black;
+/* border: 1px solid black; */
 background-color: lightgray;
 object-fit: cover;`
 
@@ -189,7 +189,7 @@ function UploadProduct({ user, setUser}) {
         price: ""
     })
     const [previewImage, setPreviewImage] = useState("")
-    const [uploaded, setUploaded] = useState(true)
+    const [uploaded, setUploaded] = useState(false)
 
        //////image uploading
     const uploadImage = async (image) => {
