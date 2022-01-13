@@ -3,6 +3,8 @@ import styled from "styled-components"
 import axios from "axios"
 import Navbar from "../components/Navbar"
 import { UploadProductFetch } from "../requestMethods"
+import { Link } from "react-router-dom"
+import UploadSuccess from "../components/UploadSuccess"
 
 const Container = styled.div`
 position: relative;
@@ -86,11 +88,11 @@ const ImageAndChoices = styled.div`
 display: flex;`
 
 const PreviewImage = styled.img`
-margin: 10px 0;
-width: 220px;
-height:195px;
+width: 140%;
+height:auto;
 border: 1px solid black;
-background-color: lightgray;`
+background-color: lightgray;
+object-fit: cover;`
 
 const BoxChoices = styled.div`
 display: flex;
@@ -100,7 +102,7 @@ margin: 10px 0;
 justify-content: space-between;
 `
 
-const Test = styled.input.attrs({ type: "checkbox" })`;
+const Test = styled.input.attrs({ type: "checkbox" })`
 `
 const BoxLabel = styled.div`
 margin-left:5px;`
@@ -118,8 +120,25 @@ z-index: 10;
 position: relative;
 width: 100%;
 `
+
+const PreviewCont = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+height: 220px;
+width: 220px;
+margin:  0 0px;
+border: 1px solid gray;
+background-color: lightgray;
+overflow: hidden;
+`
+
 const ImageCont = styled.div`
 display: flex;
+height: 220px;
+width: 100%;
+/* border: 1px solid gray; */
+/* min-width: 240px; */
 /* justify-content: space-between; */
 `
 const ImageInput = styled.input`
@@ -158,7 +177,7 @@ font-size: 25px;
 font-weight: 300;
 height: 50px;`
 
-function UploadProduct({ user, setUser }) {
+function UploadProduct({ user, setUser}) {
     const [imageSelected, setImageSelected] = useState("")
     const [productData, setProductData] = useState({
         username: "",
@@ -170,10 +189,9 @@ function UploadProduct({ user, setUser }) {
         price: ""
     })
     const [previewImage, setPreviewImage] = useState("")
+    const [uploaded, setUploaded] = useState(true)
 
-
-
-
+       //////image uploading
     const uploadImage = async (image) => {
         const formData = new FormData()
         // setImageSelected(e.target.files[0])
@@ -203,7 +221,6 @@ function UploadProduct({ user, setUser }) {
     const imageHandler = async (e) => {
         const url = await uploadImage(e.target.files[0])
         setPreviewImage(url)
-
         console.log(e.target.files);
     }
 
@@ -213,12 +230,10 @@ function UploadProduct({ user, setUser }) {
             ...productData,
             userId: user.userId,
             username: user.username,
-
         })
     }, [])
 
     //////checkboxes for categories
-
     const categories = ["Bowl", "Plate", "Vase", "Sculpture", "Ceramic", "Mug", "Other"]
     const [checkedState, setCheckedState] = useState(
         new Array(categories.length).fill(false)
@@ -233,11 +248,9 @@ function UploadProduct({ user, setUser }) {
         setCheckedState(updatedCheckedState)
         // console.log(checkedState)
     }
-    //////image uploading
-
+ 
 
     /////upload data to db
-
     const UploadData = (e) => {
         e.preventDefault()
         const testArray = []
@@ -250,9 +263,7 @@ function UploadProduct({ user, setUser }) {
             username: user.username,
             categories: testArray,
         })
-
-
-
+        setUploaded(true)
             (console.log("uploaded") &
                 console.log(productData))
         // console.log(user)
@@ -276,6 +287,8 @@ function UploadProduct({ user, setUser }) {
 
     }, [productData, checkedState])
 
+
+    console.log(previewImage);
     // const publicId = "ml5dhmg3m9yh8ulljjhf"
     return (
         <Container>
@@ -283,66 +296,68 @@ function UploadProduct({ user, setUser }) {
             <Navbar user={user} setUser={setUser} />
             <Line></Line>
             {!user ? <PleaseSignUp>
-                <Message>YOU NEED AN ACCOUNT TO BE ABLE TO SELL  
-                <br/>PLEASE SIGN UP TO CONTINUE</Message>
+                <Message>YOU NEED AN ACCOUNT TO BE ABLE TO SELL
+                    <br />PLEASE SIGN UP TO CONTINUE</Message>
             </PleaseSignUp> :
 
                 <UploadComponent >
-            <Heading>UPLOAD A PRODUCT</Heading>
-            <Cont>
-                <Label for="name">NAME</Label>
-                <Input type="text" id="name" onChange={(e) => setProductData({ ...productData, title: e.target.value })}></Input>
-            </Cont>
+                    <Heading>UPLOAD A PRODUCT</Heading>
+                    <Cont>
+                        <Label for="name">TITLE</Label>
+                        <Input type="text" id="name" onChange={(e) => setProductData({ ...productData, title: e.target.value })} required></Input>
+                    </Cont>
 
-            <ImageAndChoices>
-                <Cont >
+                    <ImageAndChoices>
+                        <Cont >
 
-                    <Label>IMAGE</Label>
-                    <ImageCont>
-                        {/* <PreviewImage src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${previewImage}.jpg`}></PreviewImage> */}
-                        <PreviewImage src={previewImage}></PreviewImage>
-                        <ImageButtonCont>
-                            <Button
-                                // onClick={uploadImage} 
-                                background="white" color="black">
-                                <AddImage>ADD IMAGE</AddImage><ImageInput type="file" onChange={(e) => imageHandler(e)}></ImageInput>
-                            </Button>
-                        </ImageButtonCont>
-                    </ImageCont>
-                    {/* <Image src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${publicId}.jpg`}></Image> */}
-                    {/* <Image src="http://res.cloudinary.com/dthuzb3gx/image/upload/v1641546000/srzyakrwrpcwrt0ylwfu.jpg"></Image> */}
+                            <Label>IMAGE</Label>
+                            <ImageCont>
+                                {/* <PreviewImage src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${previewImage}.jpg`}></PreviewImage> */}
+                                <PreviewCont>
+                                    <PreviewImage src={previewImage}></PreviewImage>
+                                    </PreviewCont>
+                                <ImageButtonCont>
+                                    <Button
+                                        // onClick={uploadImage} 
+                                        background="white" color="black">
+                                        <AddImage>ADD IMAGE</AddImage><ImageInput type="file" onChange={(e) => imageHandler(e)} required></ImageInput>
+                                    </Button>
+                                </ImageButtonCont>
+                            </ImageCont>
+                            {/* <Image src={`https://res.cloudinary.com/dthuzb3gx/image/upload/${publicId}.jpg`}></Image> */}
+                            {/* <Image src="http://res.cloudinary.com/dthuzb3gx/image/upload/v1641546000/srzyakrwrpcwrt0ylwfu.jpg"></Image> */}
 
-                </Cont>
-                <Cont>
-                    <Label>CATEGORIES</Label>
-                    <BoxChoices>
-                        {categories.map((cat, index) => {
-                            return <CatCont key={index}>
-                                <Test id={cat} name={cat} value={cat} type="checkbox"
-                                    checked={checkedState[index]}
-                                    onChange={() => handleChange(index)}
-                                />
-                                <BoxLabel>{cat}</BoxLabel>
-                            </CatCont>
-                        })}
-                    </BoxChoices>
-                </Cont>
-            </ImageAndChoices>
-            <Cont>
-                <Label for="desc">DESCRIPTION</Label>
-                <Input type="text" id="desc" onChange={(e) => setProductData({ ...productData, desc: e.target.value })}></Input>
-            </Cont>
-            <Cont>
-                <Label for="desc">PRICE</Label>
-                <Input type="text" id="price" onChange={(e) => setProductData({ ...productData, price: e.target.value })}></Input><PlaceHolder>£</PlaceHolder>
-            </Cont>
+                        </Cont>
+                        <Cont>
+                            <Label>CATEGORIES</Label>
+                            <BoxChoices>
+                                {categories.map((cat, index) => {
+                                    return <CatCont key={index}>
+                                        <Test id={cat} name={cat} value={cat} type="checkbox"
+                                            checked={checkedState[index]}
+                                            onChange={() => handleChange(index)}
+                                        />
+                                        <BoxLabel>{cat}</BoxLabel>
+                                    </CatCont>
+                                })}
+                            </BoxChoices>
+                        </Cont>
+                    </ImageAndChoices>
+                    <Cont>
+                        <Label for="desc">DESCRIPTION</Label>
+                        <Input type="text" id="desc" onChange={(e) => setProductData({ ...productData, desc: e.target.value })} required></Input>
+                    </Cont>
+                    <Cont>
+                        <Label for="desc">PRICE</Label>
+                        <Input type="text" id="price" onChange={(e) => setProductData({ ...productData, price: e.target.value })} required></Input><PlaceHolder>£</PlaceHolder>
+                    </Cont>
 
-            <Button onClick={UploadData} background="black" color="white" size="larger" border="none">POST AD</Button>
+                    <Button onClick={UploadData} background="black" color="white" size="larger" border="none">POST AD</Button>
 
+                            {uploaded ? <UploadSuccess previewImage={previewImage}/> : null}    
+                </UploadComponent>
 
-        </UploadComponent>
-            
-}
+            }
         </Container >
     )
 }

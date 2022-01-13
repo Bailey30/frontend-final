@@ -39,41 +39,62 @@ margin: 0 15px;
 background: none;
 border: none;
 font-size: 12px;
+transition: all 0.2s ease;
+&:hover{
+  color: gray;
+}
 `
 
+const HeadingText = styled.div`
+position: absolute;
+display: flex;
+flex-direction: column;
+align-items: center;  
+justify-content: center;
+width: fit-content;
+height: fit-content;
+left: 50%;
+top: 25%;
+transform: translate(-50%);`
+
 const Title = styled.div`
-font-family: Lato;
+font-family: 'Poppins', sans-serif;
+letter-spacing: 24px;
+font-weight: 200;
 font-size: 110px;
-margin-left: 20vh;
+/* margin-left: 20vh; */
 /* padding-top: 20vh; */
 color: black;
-width: 50%;
-position: absolute;
-top: 20%;
+width: fit-content;
+margin: 0 auto;
+text-align: center;
+height: fit-content;
+/* position: absolute; */
+/* top: 20%; */
 `;
 
 const H2 = styled.div`
 position: absolute;
-top: 35%;
-left: 10%;
+top: 80%;
 font-family: Lato;
 font-size: 25px;
-/* margin-left: 40vh;
-margin-top:20px;
-margin-bottom: 10px; */
 color: #272c33;
-width: 50%;
+width: 100%;
+margin-left: 20px;
+
 `;
 
 const ButtonCont = styled.div`
 position: absolute;
-width: 23%;
+width: 30%;
 display: flex;
 justify-content: space-between;
 height: auto;
-left: 38%;
+left: 49.5%;
+transform: translate(-50%);
 top: 48%;
-margin: 40px;`
+margin: 0 auto;
+`
 
 const Button1 = styled.button`
 background-color: black;
@@ -85,12 +106,14 @@ background-color: black;
   font-weight: 700;
   line-height: 24px;
   /* padding: 5px 50px; */
-  width: 200px;
+  width: 250px;
   height: 50px;
   /* margin-left: 20vh;
   margin-top: 100px; */
   text-decoration: none;
   user-select: none;
+  letter-spacing: 2px;
+  cursor: pointer;
 `;
 
 const Button2 = styled(Button1)`
@@ -106,6 +129,11 @@ text-decoration: none;
 /* margin-bottom: 70px;
 margin-left:30px; */
 width: fit-content;
+font-size: 16px;
+transition: all 0.5s ease;
+&:hover{
+  color: gray;
+}
 `;
 
 const Head = styled.div`
@@ -154,35 +182,33 @@ const Catagories = styled.div`
 display:flex;
 flex-direction: flex-row;
 justify-content: space-around;
+margin: 50px 0;
 `;
 
 const Boxes = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
-background-color: #b8a982;
-/* margin-top: 40vh;
-width: 35vh;
-height: 20vh;
-margin-left: 5vh;
-margin-bottom: 20px; */
-height: 15%;
+/* background-color: #b8a982; */
+background-color: white;
+height: 10%;
 width: 75%;
-/* margin: 0 auto; */
 position: absolute;
-bottom: 20px;
-
+bottom: 5%;
 `;
 
 const Bowls = styled.div`
 display: flex;
 flex-direction: column;
-margin:10px;
-background-image: url(${bowl});
-width: 300px;
-height: 400px;
+margin:20px;
+background-image: url("https://images.unsplash.com/photo-1610701596007-11502861dcfa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+width: 25%;
+height: 550px;
 position: relative;
 align-items: center;
+background-size: auto 100%;
+background-repeat: no-repeat;
+
 `;
 
 const Plates = styled(Bowls)`
@@ -190,6 +216,7 @@ background-image: url(${plate});
 position: relative;
 display: flex;
 align-items: center;
+background-size: 100%;
 `;
 
 const Cups = styled(Bowls)`
@@ -197,20 +224,24 @@ background-image: url(${cup});
 position: relative;
 display: flex;
 align-items: center;
+background-size: cover;
+background-repeat: no-repeat;
 `;
 
 const Vases = styled(Bowls)`
-background-image: url(${vase});
+background-image: url("https://images.unsplash.com/photo-1597385326493-bc600d15c39c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80");
 position: relative;
 display: flex;
 align-items: center;
+background-size:  100% auto;
+background-position: 75%;
+background-repeat: no-repeat;
 `;
 
 const Footer = styled.div`
 width: 100%;
 height: 30vh;
 background-color: #16191f;
-
 `;
 
 
@@ -228,7 +259,7 @@ function Home({ user, setUser }) {
         <Navbar>
           <Buttons>
 
-            <Link to='/productpage'>
+            <Link to='/productpage/All'>
               <NavButton>SHOP</NavButton>
             </Link>
             <Link to='/uploadproduct'>
@@ -250,12 +281,13 @@ function Home({ user, setUser }) {
 
           </Buttons>
         </Navbar>
-        <Title>POTTREE</Title>
-
-        <H2>Buy and sell unique, beautiful, handcrafted pottery</H2>
+        <HeadingText>
+          <Title>POTTREE</Title>
+          <H2>Buy and sell unique, beautiful, handcrafted pottery</H2>
+        </HeadingText>
 
         <ButtonCont>
-          <Link to="/productpage"><Button1 href="">Browse All</Button1></Link>
+          <Link to="/productpage"><Button1 href="">BROWSE ALL</Button1></Link>
           <Link to="/uploadproduct"><Button2>SELL</Button2></Link>
         </ButtonCont>
 
@@ -267,22 +299,24 @@ function Home({ user, setUser }) {
       <Catagories>
         <Plates>
           <Boxes>
-            <H3>PLATES</H3>
+            <Link to="productpage/Plate" style={{textDecoration: "none", color: "black", letterSpacing: "2px"}}>
+              <H3>PLATES</H3>
+              </Link>
           </Boxes>
         </Plates>
         <Cups>
           <Boxes>
-            <H3>CUPS</H3>
+          <Link to="productpage/Mug" style={{textDecoration: "none", color: "black", letterSpacing: "2px"}}><H3>CUPS</H3></Link>
           </Boxes>
         </Cups>
         <Bowls>
           <Boxes>
-            <H3>BOWLS</H3>
+          <Link to="productpage/Bowl" style={{textDecoration: "none", color: "black", letterSpacing: "2px"}}><H3>BOWLS</H3></Link>
           </Boxes>
         </Bowls>
         <Vases>
           <Boxes>
-            <H3>VASES</H3>
+          <Link to="productpage/Vase" style={{textDecoration: "none", color: "black", letterSpacing: "2px"}}><H3>VASES</H3></Link>
           </Boxes>
         </Vases>
       </Catagories>

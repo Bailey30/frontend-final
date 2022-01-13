@@ -13,7 +13,7 @@ font-family: 'Open Sans', sans-serif;
 `
 const SectionCont = styled.div`
 width: 93vw;
-box-shadow: -10px 40px 40px 5px rgba(0,0,0,0.1);
+/* box-shadow: -10px 40px 40px 5px rgba(0,0,0,0.1); */
 margin: 0 auto;
 `
 const FilterBar = styled.div`
@@ -39,7 +39,7 @@ display: flex;
 flex-wrap: wrap;
 margin: 0 auto;
 justify-content: center;
-gap: 22px;
+gap: 30px;
 /* border: 1px solid gray; */
 position: relative;
 /* z-index: 100; */
@@ -88,11 +88,10 @@ border: none;`
 
 const Option = styled.option``
 
-function ProductFeed({user, prices, setPrices}) {
+function ProductFeed({user, prices, setPrices, params, filters, setFilters}) {
     const [fetchedProductData, setFetchedProductData] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
     const [sort, setSort] = useState("")
-    const [filters, setFilters] = useState("All")
 
     // const handleFilters = (e)=> {
     //     const value = e.target.value
@@ -111,8 +110,9 @@ function ProductFeed({user, prices, setPrices}) {
     }
 
     useEffect(() => {
-        console.log(filters)
-    }, [filters])
+        setFilters(params)
+        console.log(filters); 
+    }, []) 
 
     useEffect(() => {
 
@@ -157,28 +157,18 @@ function ProductFeed({user, prices, setPrices}) {
     // }, [fetchedProductData])
 
     console.log(filteredProducts);
-    // useEffect(() => {
-
-    //     if (sort === "asc") {
-    //         setFilteredProducts(prev => [...prev].sort((a, b) => a.price - b.price))
-    //     } else if (sort === "desc") {
-    //         setFilteredProducts(prev => [...prev].sort((a, b) => b.price - a.price))
-    //     } else
-    //         setFilteredProducts(fetchedProductData)
-    // }, [sort])
-
-
+ 
 
     return (
         <Container>
             <SectionCont>
                 <FilterBar>
-                    <CategoryName>All Products</CategoryName>
+                    <CategoryName>S H O P</CategoryName>
                     <FilterContainer>
                         <Icon><SortIcon /></Icon>
                         <CategoryCont>
                             <Category>Category:</Category>
-                            <Select name="category" onChange={handleFilters}>
+                            <Select name="category" onChange={handleFilters} selected={filters}>
                                 {/* <Option value="newest">Newest</Option> */}
                                 <Option >All</Option>
                                 <Option >Mug</Option>

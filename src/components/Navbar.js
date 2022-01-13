@@ -1,9 +1,7 @@
-import React from 'react'
+import React , {useState, useEffect} from 'react'
 import styled from "styled-components";
 import { Link } from "react-router-dom"
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
-import IconButton from '@mui/material/IconButton';
 
 const NavComponent = styled.div`
   
@@ -63,14 +61,19 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-function Navbar({ user, setUser }) {
+function Navbar({ user, setUser, prices }) {
 
     const logOut = () => {
         localStorage.removeItem("myToken")
         setUser("")
         console.log(user);
         // setLoggedIn(false)
-    }
+    } 
+    const [basketNum, setBasketNum] = useState()
+    
+    useEffect(() => {
+      setBasketNum(prices)
+    }, [prices])
 
     return (
         <NavComponent>
@@ -79,7 +82,7 @@ function Navbar({ user, setUser }) {
             </Link>
             <Buttons>
 
-                <Link to='/productpage'>
+                <Link to='/productpage/All'>
                     <NavButton>SHOP</NavButton>
                 </Link>
                 <Link to='/uploadproduct'>

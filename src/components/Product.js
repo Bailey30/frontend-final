@@ -30,6 +30,7 @@ z-index: 100;
 display: flex;
 /* align-items: center; */
 justify-content: center;
+transition: all 0.5s ease;
 `
 
 const IconCont = styled.div`
